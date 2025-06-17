@@ -1,6 +1,6 @@
 {
   "name": "@cedra-labs/wallet-adapter-core",
-  "version": "5.5.1",
+  "version": "5.5.2",
   "description": "Cedra Wallet Adapter Core",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
