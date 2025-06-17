@@ -85,13 +85,13 @@
 
 ### Patch Changes
 
-- 62d860d: Update @identity-connect/wallet-adapter-plugin to 2.4.1
+- 62d860d: Update @cedra-labs/wallet-adapter-plugin to 2.4.1
 
 ## 5.0.1
 
 ### Patch Changes
 
-- 792dadf: Update @cedra-labs/wallet-standard to 0.3.0 and @identity-connect/wallet-adapter-plugin to 2.4.0
+- 792dadf: Update @cedra-labs/wallet-standard to 0.3.0 and @cedra-labs/wallet-adapter-plugin to 2.4.0
 
 ## 5.0.0
 
@@ -156,7 +156,7 @@
 
 ### Minor Changes
 
-- f5ba2f2: Bump `@identity-connect/wallet-adapter-plugin` to 2.3.2 to support Apple logins
+- f5ba2f2: Bump `@cedra-labs/wallet-adapter-plugin` to 2.3.2 to support Apple logins
 
 ## 4.19.0
 
@@ -175,7 +175,7 @@
 
 ### Minor Changes
 
-- 67440bf: Bumped `@identity-connect/wallet-adapter-plugin` to 2.1.0 to enable Telegram support
+- 67440bf: Bumped `@cedra-labs/wallet-adapter-plugin` to 2.1.0 to enable Telegram support
 - bde8112: Handle arguments conversion when submitting a package publish transaction
 
 ## 4.17.0
@@ -183,7 +183,7 @@
 ### Minor Changes
 
 - e252fce: Add support for a dapp generated api key
-- bd54d77: Bumped `@identity-connect/wallet-adapter-plugin` to 2.0.2 and exposed `preferredWalletName` option
+- bd54d77: Bumped `@cedra-labs/wallet-adapter-plugin` to 2.0.2 and exposed `preferredWalletName` option
 
 ### Patch Changes
 
@@ -291,7 +291,7 @@
 
 ### Patch Changes
 
-- 79a0212: Bumped to `@identity-connect/wallet-adapter-plugin` v1.0.1
+- 79a0212: Bumped to `@cedra-labs/wallet-adapter-plugin` v1.0.1
 
 ## 4.8.1
 
@@ -339,7 +339,7 @@
 
 ### Patch Changes
 
-- 9566c50: Bumped @identity-connect/wallet-adapter-plugin version to include args normalization fix
+- 9566c50: Bumped @cedra-labs/wallet-adapter-plugin version to include args normalization fix
 
 ## 4.2.1
 

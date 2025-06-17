@@ -8,7 +8,7 @@ A monorepo modular wallet adapter developed and maintained by Cedra for wallet a
 
 - [Example app](https://github.com/cedra-labs/cedra-wallet-adapter/tree/main/apps/nextjs-example)
 - [For Cedra Dapps](https://github.com/cedra-labs/cedra-wallet-adapter/tree/main/packages/wallet-adapter-react/READMEV2.md)
-- [For Cedra Wallets](https://github.com/identity-connect/wallet-adapter-plugin-template)
+- [For Cedra Wallets](https://github.com/cedra-labs/wallet-adapter-plugin-template)
 - [Core package](https://github.com/cedra-labs/cedra-wallet-adapter/tree/main/packages/wallet-adapter-core)
 - [Wallet connect UI package](https://github.com/cedra-labs/cedra-wallet-adapter/tree/main/packages/wallet-adapter-ant-design)
 

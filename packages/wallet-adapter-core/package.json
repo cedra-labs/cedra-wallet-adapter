@@ -54,7 +54,7 @@
     "typescript": "^4.5.3"
   },
   "dependencies": {
-    "@identity-connect/wallet-adapter-plugin": "1.2.5",
+    "@cedra-labs/wallet-adapter-plugin": "2.4.3",
     "@cedra-labs/wallet-standard": "^0.4.0",
     "buffer": "^6.0.3",
     "eventemitter3": "^4.0.7",

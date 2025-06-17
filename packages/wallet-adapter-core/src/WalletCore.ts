@@ -33,7 +33,7 @@ import {
   CedraSignInInput,
   CedraSignInOutput,
 } from "@cedra-labs/wallet-standard";
-import { CedraConnectWalletConfig } from "@identity-connect/wallet-adapter-plugin";
+import { CedraConnectWalletConfig } from "@cedra-labs/wallet-adapter-plugin";
 
 export type {
   NetworkInfo,

@@ -1,7 +1,7 @@
 import {
   CedraConnectAppleWallet,
   CedraConnectGoogleWallet,
-} from "@identity-connect/wallet-adapter-plugin";
+} from "@cedra-labs/wallet-adapter-plugin";
 import { Network } from "@cedra-labs/ts-sdk";
 // import { DevTWallet, TWallet } from "@cedra-labs/cedra-wallet-adapter";
 import { MSafeWallet } from "./msafeWallet.ts";
