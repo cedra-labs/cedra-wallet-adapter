@@ -17,7 +17,7 @@ import {
 import {
   CedraUnsignedTransaction,
   CedraChains,
-} from "@wormhole-foundation/sdk-cedra";
+} from "@cedra-labs/wormhole-sdk";
 import { GasStationApiKey } from "../types";
 
 export class CedraLocalSigner<N extends Network, C extends Chain>

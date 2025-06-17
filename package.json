@@ -43,7 +43,7 @@
   "packageManager": "pnpm@9.15.5",
   "pnpm": {
     "overrides": {
-      "@cedra-labs/cedra-client": "^1.2.0"
+      "@cedra-labs/cedra-client": "^2.0.1"
     }
   }
 }

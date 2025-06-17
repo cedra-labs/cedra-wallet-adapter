@@ -1,10 +1,10 @@
 import {
   CedraConnectAppleWallet,
   CedraConnectGoogleWallet,
-} from "@cedra-connect/wallet-adapter-plugin";
+} from "@identity-connect/wallet-adapter-plugin";
 import { Network } from "@cedra-labs/ts-sdk";
-import { DevTWallet, TWallet } from "@atomrigslab/cedra-wallet-adapter";
-import { MSafeWallet } from "@msafe/cedra-aip62-wallet";
+import { DevTWallet, TWallet } from "@atomrigslab/aptos-wallet-adapter";
+import { MSafeWallet } from "./msafeWallet.ts";
 import { DappConfig, AdapterWallet } from "./WalletCore";
 
 export function getSDKWallets(dappConfig?: DappConfig) {

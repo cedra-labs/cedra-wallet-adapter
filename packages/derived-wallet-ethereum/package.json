@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@cedra-labs/derived-wallet-base": "workspace:^",
-    "@cedra-labs/siwa": "^0.2.5",
     "@cedra-labs/wallet-standard": "^0.4.0",
     "@wallet-standard/app": "^1.1.0",
     "ethers": "^6.13.5",
