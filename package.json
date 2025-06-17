@@ -29,7 +29,7 @@
     "vue-example:build": "pnpm run --filter {apps/nuxt-example} build"
   },
   "devDependencies": {
-    "@cedra-labs/eslint-config-adapter": "workspace:*",
+    "@cedra-labs/eslint-config-adapter": "0.0.2",
     "@changesets/cli": "^2.22.0",
     "prettier": "latest",
     "turbo": "latest"
