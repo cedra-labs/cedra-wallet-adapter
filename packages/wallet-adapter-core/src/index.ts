@@ -1,10 +1,10 @@
 import { WALLET_ADAPTER_CORE_VERSION } from "./version";
 
 export type {
-  AptosSignInOutput,
-  AptosSignInInput,
-  AptosSignInRequiredFields,
-} from "@aptos-labs/wallet-standard";
+  CedraSignInOutput,
+  CedraSignInInput,
+  CedraSignInRequiredFields,
+} from "@cedra-labs/wallet-standard";
 
 export * from "./WalletCore";
 export * from "./constants";

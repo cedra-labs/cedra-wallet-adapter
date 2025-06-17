@@ -1,4 +1,4 @@
-import { WalletSortingOptions } from "@aptos-labs/wallet-adapter-react";
+import { WalletSortingOptions } from "@cedra-labs/wallet-adapter-react";
 import { Breakpoint } from "@mui/material";
 import { useState } from "react";
 import WalletButton from "./WalletButton";

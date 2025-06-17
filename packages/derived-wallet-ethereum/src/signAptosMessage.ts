@@ -3,14 +3,14 @@ import {
   mapUserResponse,
   StructuredMessage,
   StructuredMessageInput,
-} from "@aptos-labs/derived-wallet-base";
-import { hashValues } from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/derived-wallet-base";
+import { hashValues } from "@cedra-labs/ts-sdk";
 import {
-  AptosSignMessageOutput,
+  CedraSignMessageOutput,
   UserResponse,
-} from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/wallet-standard";
 import { BrowserProvider, Eip1193Provider } from "ethers";
-import { createSiweEnvelopeForAptosStructuredMessage } from "./createSiweEnvelope";
+import { createSiweEnvelopeForCedraStructuredMessage } from "./createSiweEnvelope";
 import { EIP1193DerivedPublicKey } from "./EIP1193DerivedPublicKey";
 import { EIP1193DerivedSignature } from "./EIP1193DerivedSignature";
 import { EthereumAddress, wrapEthersUserResponse } from "./shared";
@@ -20,16 +20,16 @@ export interface StructuredMessageInputWithChainId
   chainId: number;
 }
 
-export interface SignAptosMessageWithEthereumInput {
+export interface SignCedraMessageWithEthereumInput {
   eip1193Provider: Eip1193Provider | BrowserProvider;
   ethereumAddress?: EthereumAddress;
   authenticationFunction: string;
   messageInput: StructuredMessageInputWithChainId;
 }
 
-export async function signAptosMessageWithEthereum(
-  input: SignAptosMessageWithEthereumInput,
-): Promise<UserResponse<AptosSignMessageOutput>> {
+export async function signCedraMessageWithEthereum(
+  input: SignCedraMessageWithEthereumInput,
+): Promise<UserResponse<CedraSignMessageOutput>> {
   const { authenticationFunction, messageInput } = input;
   const eip1193Provider =
     input.eip1193Provider instanceof BrowserProvider
@@ -45,19 +45,19 @@ export async function signAptosMessageWithEthereum(
   }
   const ethereumAddress = ethereumAccount.address as EthereumAddress;
 
-  const aptosPublicKey = new EIP1193DerivedPublicKey({
+  const cedraPublicKey = new EIP1193DerivedPublicKey({
     domain: window.location.origin,
     ethereumAddress,
     authenticationFunction,
   });
 
   const { message, nonce, chainId, ...flags } = messageInput;
-  const aptosAddress = flags.address
-    ? aptosPublicKey.authKey().derivedAddress()
+  const cedraAddress = flags.address
+    ? cedraPublicKey.authKey().derivedAddress()
     : undefined;
   const application = flags.application ? window.location.origin : undefined;
   const structuredMessage: StructuredMessage = {
-    address: aptosAddress?.toString(),
+    address: cedraAddress?.toString(),
     application,
     chainId,
     message,
@@ -69,7 +69,7 @@ export async function signAptosMessageWithEthereum(
 
   // We need to provide `issuedAt` externally so that we can match it with the signature
   const issuedAt = new Date();
-  const siweMessage = createSiweEnvelopeForAptosStructuredMessage({
+  const siweMessage = createSiweEnvelopeForCedraStructuredMessage({
     ethereumAddress,
     chainId,
     structuredMessage,
@@ -90,7 +90,7 @@ export async function signAptosMessageWithEthereum(
     );
     const fullMessage = new TextDecoder().decode(signingMessage);
     return {
-      prefix: "APTOS",
+      prefix: "CEDRA",
       fullMessage,
       message,
       nonce,

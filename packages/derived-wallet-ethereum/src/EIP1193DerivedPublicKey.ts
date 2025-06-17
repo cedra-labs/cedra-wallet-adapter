@@ -1,11 +1,11 @@
 import {
   computeDerivableAuthenticationKey,
-  parseAptosSigningMessage,
-} from "@aptos-labs/derived-wallet-base";
+  parseCedraSigningMessage,
+} from "@cedra-labs/derived-wallet-base";
 import {
   AccountPublicKey,
-  Aptos,
-  AptosConfig,
+  Cedra,
+  CedraConfig,
   AuthenticationKey,
   Deserializer,
   hashValues,
@@ -14,11 +14,11 @@ import {
   Serializer,
   Signature,
   VerifySignatureArgs,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import { verifyMessage as verifyEthereumMessage } from "ethers";
 import {
-  createSiweEnvelopeForAptosStructuredMessage,
-  createSiweEnvelopeForAptosTransaction,
+  createSiweEnvelopeForCedraStructuredMessage,
+  createSiweEnvelopeForCedraTransaction,
 } from "./createSiweEnvelope";
 import { EIP1193DerivedSignature } from "./EIP1193DerivedSignature";
 import { EthereumAddress } from "./shared";
@@ -58,7 +58,7 @@ export class EIP1193DerivedPublicKey extends AccountPublicKey {
   }
 
   verifySignature({ message, signature }: VerifySignatureArgs): boolean {
-    const parsedSigningMessage = parseAptosSigningMessage(message);
+    const parsedSigningMessage = parseCedraSigningMessage(message);
     if (
       !parsedSigningMessage ||
       !(signature instanceof EIP1193DerivedSignature)
@@ -78,12 +78,12 @@ export class EIP1193DerivedPublicKey extends AccountPublicKey {
 
     const siweMessage =
       parsedSigningMessage.type === "structuredMessage"
-        ? createSiweEnvelopeForAptosStructuredMessage({
+        ? createSiweEnvelopeForCedraStructuredMessage({
             ...parsedSigningMessage,
             ...envelopeInput,
             chainId: 0, // TODO: use 0 does not really work, either way remove this once we rewrite the regular sign message to use the default wallet signMessage
           })
-        : createSiweEnvelopeForAptosTransaction({
+        : createSiweEnvelopeForCedraTransaction({
             ...parsedSigningMessage,
             ...envelopeInput,
             chainId:
@@ -96,7 +96,7 @@ export class EIP1193DerivedPublicKey extends AccountPublicKey {
   }
 
   async verifySignatureAsync(args: {
-    aptosConfig: AptosConfig;
+    cedraConfig: CedraConfig;
     message: HexInput;
     signature: Signature;
   }): Promise<boolean> {

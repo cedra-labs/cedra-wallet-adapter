@@ -1,5 +1,5 @@
-import { AccountPublicKey, Aptos } from "@aptos-labs/ts-sdk";
-import { AccountInfo } from "@aptos-labs/wallet-standard";
+import { AccountPublicKey, Cedra } from "@cedra-labs/ts-sdk";
+import { AccountInfo } from "@cedra-labs/wallet-standard";
 
 export function accountInfoFromPublicKey(publicKey: AccountPublicKey) {
   return new AccountInfo({
@@ -16,6 +16,6 @@ export function isNullCallback(callback: Function) {
  * Helper function to fetch Devnet chain id
  */
 export const fetchDevnetChainId = async (): Promise<number> => {
-  const aptos = new Aptos(); // default to devnet
-  return await aptos.getChainId();
+  const cedra = new Cedra(); // default to devnet
+  return await cedra.getChainId();
 };

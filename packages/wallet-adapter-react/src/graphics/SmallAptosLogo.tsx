@@ -1,6 +1,6 @@
 import { SVGProps, forwardRef } from "react";
 
-export const SmallAptosLogo = forwardRef<
+export const SmallCedraLogo = forwardRef<
   SVGSVGElement,
   SVGProps<SVGSVGElement>
 >((props, ref) => {
@@ -22,4 +22,4 @@ export const SmallAptosLogo = forwardRef<
     </svg>
   );
 });
-SmallAptosLogo.displayName = "SmallAptosLogo";
+SmallCedraLogo.displayName = "SmallCedraLogo";

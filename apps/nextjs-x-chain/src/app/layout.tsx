@@ -1,4 +1,4 @@
-import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import "@cedra-labs/wallet-adapter-ant-design/dist/index.css";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -17,9 +17,9 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Aptos Cross Chain Wallet Adapter Example",
+  title: "Cedra Cross Chain Wallet Adapter Example",
   description:
-    "An example of how to use Aptos Cross Chain Wallet Adapter with React and Next.js.",
+    "An example of how to use Cedra Cross Chain Wallet Adapter with React and Next.js.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

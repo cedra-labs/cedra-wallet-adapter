@@ -16,19 +16,19 @@ import { Web3Graphic } from "../graphics/Web3Graphic";
 import { HeadlessComponentProps, createHeadlessComponent } from "./utils";
 
 export const EXPLORE_ECOSYSTEM_URL =
-  "https://aptosfoundation.org/ecosystem/projects/all";
+  "https://cedrafoundation.org/ecosystem/projects/all";
 
-const AboutAptosConnectContext = createContext<{
+const AboutCedraConnectContext = createContext<{
   screenIndex: number;
   setScreenIndex: Dispatch<SetStateAction<number>>;
 } | null>(null);
 
-function useAboutAptosConnectContext(displayName: string) {
-  const context = useContext(AboutAptosConnectContext);
+function useAboutCedraConnectContext(displayName: string) {
+  const context = useContext(AboutCedraConnectContext);
 
   if (!context) {
     throw new Error(
-      `\`${displayName}\` must be used within \`AboutAptosConnect\``,
+      `\`${displayName}\` must be used within \`AboutCedraConnect\``,
     );
   }
 
@@ -43,7 +43,7 @@ const educationScreens = [
     }),
     Description: createHeadlessComponent("EducationScreen.Description", "p", {
       children:
-        "Aptos Connect is a web3 wallet that uses a Social Login to create accounts on the Aptos blockchain.",
+        "Cedra Connect is a web3 wallet that uses a Social Login to create accounts on the Cedra blockchain.",
     }),
   },
   {
@@ -64,8 +64,8 @@ const educationScreens = [
     Description: createHeadlessComponent("EducationScreen.Description", "p", {
       children: (
         <>
-          Aptos Connect lets you take one account across any application built
-          on Aptos.{" "}
+          Cedra Connect lets you take one account across any application built
+          on Cedra.{" "}
           <a
             href={EXPLORE_ECOSYSTEM_URL}
             target="_blank"
@@ -84,10 +84,10 @@ const educationScreenIndicators = Array(educationScreens.length)
   .fill(null)
   .map((_, index) =>
     createHeadlessComponent(
-      "AboutAptosConnect.ScreenIndicator",
+      "AboutCedraConnect.ScreenIndicator",
       "button",
       (displayName) => {
-        const context = useAboutAptosConnectContext(displayName);
+        const context = useAboutCedraConnectContext(displayName);
         const isActive = context.screenIndex - 1 === index;
 
         return {
@@ -102,7 +102,7 @@ const educationScreenIndicators = Array(educationScreens.length)
     ),
   );
 
-export interface AboutAptosConnectEducationScreen {
+export interface AboutCedraConnectEducationScreen {
   /** A component that renders an SVG to illustrate the idea of the current screen. */
   Graphic: ForwardRefExoticComponent<
     Omit<SVGProps<SVGSVGElement>, "ref"> & RefAttributes<SVGSVGElement>
@@ -140,26 +140,26 @@ export interface AboutAptosConnectEducationScreen {
   cancel: () => void;
 }
 
-export interface AboutAptosConnectProps {
+export interface AboutCedraConnectProps {
   /**
    * A function for defining how each education screen should be rendered.
    * Each screen is modeled as a uniform set of headless components and utilities
    * that allow you to construct your UI and apply your own styles.
    */
   renderEducationScreen: (
-    screen: AboutAptosConnectEducationScreen,
+    screen: AboutCedraConnectEducationScreen,
   ) => ReactNode;
   /**
    * The initial wallet selection UI that will be replaced by the education
-   * screens when `AboutAptosConnect.Trigger` is clicked.
+   * screens when `AboutCedraConnect.Trigger` is clicked.
    */
   children?: ReactNode;
 }
 
-const Root = ({ renderEducationScreen, children }: AboutAptosConnectProps) => {
+const Root = ({ renderEducationScreen, children }: AboutCedraConnectProps) => {
   const [screenIndex, setScreenIndex] = useState(0);
 
-  const currentEducationScreen: AboutAptosConnectEducationScreen = useMemo(
+  const currentEducationScreen: AboutCedraConnectEducationScreen = useMemo(
     () =>
       educationScreens.map((screen, i) => ({
         ...screen,
@@ -182,20 +182,20 @@ const Root = ({ renderEducationScreen, children }: AboutAptosConnectProps) => {
   );
 
   return (
-    <AboutAptosConnectContext.Provider value={{ screenIndex, setScreenIndex }}>
+    <AboutCedraConnectContext.Provider value={{ screenIndex, setScreenIndex }}>
       {screenIndex === 0
         ? children
         : renderEducationScreen(currentEducationScreen)}
-    </AboutAptosConnectContext.Provider>
+    </AboutCedraConnectContext.Provider>
   );
 };
-Root.displayName = "AboutAptosConnect";
+Root.displayName = "AboutCedraConnect";
 
 const Trigger = createHeadlessComponent(
-  "AboutAptosConnect.Trigger",
+  "AboutCedraConnect.Trigger",
   "button",
   (displayName) => {
-    const context = useAboutAptosConnectContext(displayName);
+    const context = useAboutCedraConnectContext(displayName);
 
     return {
       onClick: () => {
@@ -207,8 +207,8 @@ const Trigger = createHeadlessComponent(
 
 /**
  * A headless component for rendering education screens that explain the basics
- * of Aptos Connect and web3 wallets.
+ * of Cedra Connect and web3 wallets.
  */
-export const AboutAptosConnect = Object.assign(Root, {
+export const AboutCedraConnect = Object.assign(Root, {
   Trigger,
 });

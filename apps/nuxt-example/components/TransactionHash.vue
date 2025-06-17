@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NetworkInfo, isAptosNetwork } from "@aptos-labs/wallet-adapter-core";
+import { NetworkInfo, isCedraNetwork } from "@cedra-labs/wallet-adapter-core";
 
 interface TransactionHashProps {
   hash: string;
@@ -10,11 +10,11 @@ const props = defineProps<TransactionHashProps>();
 
 const { hash, network } = toRefs(props);
 
-const isAptosLink = computed(() => isAptosNetwork(network.value));
+const isCedraLink = computed(() => isCedraNetwork(network.value));
 
 const explorerLink = computed(() => {
-  if (isAptosLink.value) {
-    return `https://explorer.aptoslabs.com/txn/${hash.value}${
+  if (isCedraLink.value) {
+    return `https://explorer.cedralabs.com/txn/${hash.value}${
       network.value?.name ? `?network=${network.value?.name}` : ""
     }`;
   }
@@ -23,7 +23,7 @@ const explorerLink = computed(() => {
 </script>
 
 <template>
-  <template v-if="isAptosLink">
+  <template v-if="isCedraLink">
     View on Explorer:
     <a
       :href="explorerLink"

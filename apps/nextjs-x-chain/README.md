@@ -1,13 +1,13 @@
-# Aptos Wallet Adapter Croos Chain Demo App
+# Cedra Wallet Adapter Croos Chain Demo App
 
-This project is a demo of the Aptos Croos Chain Wallet Selector using [Next.js](https://nextjs.org/) and [shadcn/ui](https://ui.shadcn.com/).
+This project is a demo of the Cedra Croos Chain Wallet Selector using [Next.js](https://nextjs.org/) and [shadcn/ui](https://ui.shadcn.com/).
 
 A live version is hosted at:
-https://aptos-labs.github.io/aptos-wallet-adapter
+https://cedra-labs.github.io/cedra-wallet-adapter
 
 ## Use shadcn/ui wallet selector for your own app
 
-If you want to add the shadcn/ui Aptos wallet selector to your shadcn-based app, follow these steps:
+If you want to add the shadcn/ui Cedra wallet selector to your shadcn-based app, follow these steps:
 
 - Follow the [shadcn/ui installation instructions](https://ui.shadcn.com/docs/installation) if you haven't already configured it in your app.
 
@@ -19,7 +19,7 @@ npx shadcn@latest add button collapsible dialog dropdown-menu toast
 
 - Copy the [wallet-selector.tsx](./src/components/WalletSelector.tsx) file from this repo to your `src/components/` directory.
 
-- If you have not already configured `AptosWalletAdapterProvider` for your app, you can also copy the [wallet-provider.tsx](./src/components/WalletProvider.tsx) file from this repo. Be sure to install the `@aptos-labs/wallet-adapter-react` package and the wallet adapter plugins for the wallet options you plan to support.
+- If you have not already configured `CedraWalletAdapterProvider` for your app, you can also copy the [wallet-provider.tsx](./src/components/WalletProvider.tsx) file from this repo. Be sure to install the `@cedra-labs/wallet-adapter-react` package and the wallet adapter plugins for the wallet options you plan to support.
 
 - Wrap your app with the `WalletProvider` component. See [layout.tsx](./src/app/layout.tsx) for an example.
 

@@ -31,10 +31,10 @@ export const mainnetTokens: Record<string, TokenConfig> = {
   // },
 };
 
-export const AptosMainnetUSDCToken: TokenConfig = {
+export const CedraMainnetUSDCToken: TokenConfig = {
   symbol: "USDC",
   tokenId: {
-    chain: "Aptos",
+    chain: "Cedra",
     address:
       "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b",
   },

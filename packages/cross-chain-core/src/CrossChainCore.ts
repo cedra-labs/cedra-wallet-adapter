@@ -1,4 +1,4 @@
-import { Account, Network } from "@aptos-labs/ts-sdk";
+import { Account, Network } from "@cedra-labs/ts-sdk";
 
 import {
   WormholeInitiateTransferRequest,
@@ -15,17 +15,17 @@ import {
   mainnetChains,
   mainnetTokens,
   TokenConfig,
-  AptosTestnetUSDCToken,
-  AptosMainnetUSDCToken,
+  CedraTestnetUSDCToken,
+  CedraMainnetUSDCToken,
 } from "./config";
 import {
-  getAptosWalletUSDCBalance,
+  getCedraWalletUSDCBalance,
   getEthereumWalletUSDCBalance,
   getSolanaWalletUSDCBalance,
 } from "./utils/getUsdcBalance";
 
 export interface CrossChainDappConfig {
-  aptosNetwork: Network;
+  cedraNetwork: Network;
   disableTelemetry?: boolean;
   solanaConfig?: {
     rpc?: string;
@@ -37,11 +37,11 @@ export interface CrossChainDappConfig {
     };
   };
 }
-export type { AccountAddressInput } from "@aptos-labs/ts-sdk";
-export { NetworkToChainId, NetworkToNodeAPI } from "@aptos-labs/ts-sdk";
-export type AptosAccount = Account;
+export type { AccountAddressInput } from "@cedra-labs/ts-sdk";
+export { NetworkToChainId, NetworkToNodeAPI } from "@cedra-labs/ts-sdk";
+export type CedraAccount = Account;
 
-export type Chain = "Solana" | "Ethereum" | "Sepolia" | "Aptos";
+export type Chain = "Solana" | "Ethereum" | "Sepolia" | "Cedra";
 
 export type CCTPProviders = "Wormhole";
 
@@ -59,24 +59,24 @@ export interface CrossChainProvider<
 
 export class CrossChainCore {
   readonly _dappConfig: CrossChainDappConfig = {
-    aptosNetwork: Network.TESTNET,
+    cedraNetwork: Network.TESTNET,
   };
 
   readonly CHAINS: ChainsConfig = testnetChains;
   readonly TOKENS: Record<string, TokenConfig> = testnetTokens;
 
-  readonly APTOS_TOKEN: TokenConfig = AptosTestnetUSDCToken;
+  readonly CEDRA_TOKEN: TokenConfig = CedraTestnetUSDCToken;
 
   constructor(args: { dappConfig: CrossChainDappConfig }) {
     this._dappConfig = args.dappConfig;
-    if (args.dappConfig?.aptosNetwork === Network.MAINNET) {
+    if (args.dappConfig?.cedraNetwork === Network.MAINNET) {
       this.CHAINS = mainnetChains;
       this.TOKENS = mainnetTokens;
-      this.APTOS_TOKEN = AptosMainnetUSDCToken;
+      this.CEDRA_TOKEN = CedraMainnetUSDCToken;
     } else {
       this.CHAINS = testnetChains;
       this.TOKENS = testnetTokens;
-      this.APTOS_TOKEN = AptosTestnetUSDCToken;
+      this.CEDRA_TOKEN = CedraTestnetUSDCToken;
     }
   }
 
@@ -98,10 +98,10 @@ export class CrossChainCore {
     walletAddress: string,
     sourceChain: Chain,
   ): Promise<string> {
-    if (sourceChain === "Aptos") {
-      return await getAptosWalletUSDCBalance(
+    if (sourceChain === "Cedra") {
+      return await getCedraWalletUSDCBalance(
         walletAddress,
-        this._dappConfig.aptosNetwork,
+        this._dappConfig.cedraNetwork,
       );
     }
     if (!this.CHAINS[sourceChain]) {
@@ -111,7 +111,7 @@ export class CrossChainCore {
       case "Solana":
         return await getSolanaWalletUSDCBalance(
           walletAddress,
-          this._dappConfig.aptosNetwork,
+          this._dappConfig.cedraNetwork,
           this._dappConfig?.solanaConfig?.rpc ??
             this.CHAINS[sourceChain].defaultRpc,
         );
@@ -119,7 +119,7 @@ export class CrossChainCore {
       case "Sepolia":
         return await getEthereumWalletUSDCBalance(
           walletAddress,
-          this._dappConfig.aptosNetwork,
+          this._dappConfig.cedraNetwork,
           // TODO: maybe let the user config it
           this.CHAINS[sourceChain].defaultRpc,
         );

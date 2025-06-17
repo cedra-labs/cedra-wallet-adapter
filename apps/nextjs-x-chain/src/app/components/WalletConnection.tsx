@@ -2,16 +2,16 @@ import { DisplayValue, LabelValueGrid } from "@/components/LabelValueGrid";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Network } from "@aptos-labs/ts-sdk";
+import { Network } from "@cedra-labs/ts-sdk";
 import {
   AccountInfo,
   AdapterWallet,
-  AptosChangeNetworkOutput,
-  isAptosNetwork,
+  CedraChangeNetworkOutput,
+  isCedraNetwork,
   NetworkInfo,
   OriginWalletDetails,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 import Image from "next/image";
 
 interface WalletConnectionProps {
@@ -19,7 +19,7 @@ interface WalletConnectionProps {
   network: NetworkInfo | null;
   wallet: AdapterWallet | null;
   originWalletDetails: OriginWalletDetails | undefined;
-  changeNetwork: (network: Network) => Promise<AptosChangeNetworkOutput>;
+  changeNetwork: (network: Network) => Promise<CedraChangeNetworkOutput>;
 }
 
 export function WalletConnection({
@@ -32,18 +32,18 @@ export function WalletConnection({
   const { isSolanaDerivedWallet, isEIP1193DerivedWallet } = useWallet();
 
   const isValidNetworkName = () => {
-    if (isAptosNetwork(network)) {
+    if (isCedraNetwork(network)) {
       return Object.values<string | undefined>(Network).includes(network?.name);
     }
-    // If the configured network is not an Aptos network, i.e is a custom network
+    // If the configured network is not an Cedra network, i.e is a custom network
     // we resolve it as a valid network name
     return true;
   };
 
   const isNetworkChangeSupported =
-    wallet?.features["aptos:changeNetwork"] !== undefined;
+    wallet?.features["cedra:changeNetwork"] !== undefined;
 
-  const aptosAccountInfoLabels = [
+  const cedraAccountInfoLabels = [
     {
       label: "Address",
       value: (
@@ -72,7 +72,7 @@ export function WalletConnection({
     wallet &&
     (isSolanaDerivedWallet(wallet) || isEIP1193DerivedWallet(wallet))
   ) {
-    aptosAccountInfoLabels.push({
+    cedraAccountInfoLabels.push({
       label: "Origin Wallet Address",
       value: (
         <DisplayValue
@@ -130,8 +130,8 @@ export function WalletConnection({
         </div>
 
         <div className="flex flex-col gap-6">
-          <h4 className="text-lg font-medium">Aptos Account Info</h4>
-          <LabelValueGrid items={aptosAccountInfoLabels} />
+          <h4 className="text-lg font-medium">Cedra Account Info</h4>
+          <LabelValueGrid items={cedraAccountInfoLabels} />
         </div>
 
         <div className="flex flex-col gap-6">

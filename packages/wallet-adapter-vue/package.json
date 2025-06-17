@@ -1,7 +1,7 @@
 {
-  "name": "@aptos-labs/wallet-adapter-vue",
+  "name": "@cedra-labs/wallet-adapter-vue",
   "version": "0.4.0",
-  "description": "Aptos Wallet Adapter Vue Provider",
+  "description": "Cedra Wallet Adapter Vue Provider",
   "license": "Apache-2.0",
   "type": "module",
   "files": [
@@ -20,16 +20,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter.git"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-wallet-adapter",
+  "homepage": "https://github.com/cedra-labs/cedra-wallet-adapter",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter/issues"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "cedralabs.com",
   "keywords": [
-    "Aptos",
-    "Aptos Labs",
+    "Cedra",
+    "Cedra Labs",
     "Wallet",
     "Wallet Adapter",
     "Wallet Adapter Provider",
@@ -43,7 +43,7 @@
     "build": "pnpm build:bundle"
   },
   "dependencies": {
-    "@aptos-labs/wallet-adapter-core": "5.0.0"
+    "@cedra-labs/wallet-adapter-core": "5.0.0"
   },
   "devDependencies": {
     "vite": "5.4.19",

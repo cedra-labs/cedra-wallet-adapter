@@ -1,7 +1,7 @@
 {
-  "name": "@aptos-labs/wallet-adapter-react",
+  "name": "@cedra-labs/wallet-adapter-react",
   "version": "6.0.4",
-  "description": "Aptos Wallet Adapter React Provider",
+  "description": "Cedra Wallet Adapter React Provider",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,16 +13,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter.git"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-wallet-adapter",
+  "homepage": "https://github.com/cedra-labs/cedra-wallet-adapter",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter/issues"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "cedralabs.com",
   "keywords": [
-    "Aptos",
-    "Aptos Labs",
+    "Cedra",
+    "Cedra Labs",
     "Wallet",
     "Wallet Adapter",
     "Wallet Adapter Provider",
@@ -37,23 +37,23 @@
     "lint": "TIMING=1 eslint \"src/**/*.ts*\""
   },
   "devDependencies": {
-    "@aptos-labs/wallet-adapter-tsconfig": "workspace:*",
+    "@cedra-labs/wallet-adapter-tsconfig": "workspace:*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.15.0",
     "tsup": "^8.4.0",
     "typescript": "^5.4.5",
-    "@aptos-labs/derived-wallet-solana": "workspace:*",
-    "@aptos-labs/derived-wallet-ethereum": "workspace:*"
+    "@cedra-labs/derived-wallet-solana": "workspace:*",
+    "@cedra-labs/derived-wallet-ethereum": "workspace:*"
   },
   "dependencies": {
-    "@aptos-labs/wallet-adapter-core": "workspace:*",
+    "@cedra-labs/wallet-adapter-core": "workspace:*",
     "@radix-ui/react-slot": "^1.0.2"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
-    "@aptos-labs/derived-wallet-solana": "workspace:*",
-    "@aptos-labs/derived-wallet-ethereum": "workspace:*"
+    "@cedra-labs/derived-wallet-solana": "workspace:*",
+    "@cedra-labs/derived-wallet-ethereum": "workspace:*"
   },
   "files": [
     "dist",

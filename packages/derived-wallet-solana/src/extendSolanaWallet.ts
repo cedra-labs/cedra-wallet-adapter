@@ -1,32 +1,32 @@
-import { AccountAuthenticator, AnyRawTransaction } from "@aptos-labs/ts-sdk";
+import { AccountAuthenticator, AnyRawTransaction } from "@cedra-labs/ts-sdk";
 import {
-  AptosSignMessageOutput,
+  CedraSignMessageOutput,
   UserResponse,
-} from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/wallet-standard";
 import { StandardWalletAdapter as SolanaWalletAdapter } from "@solana/wallet-standard-wallet-adapter-base";
 import { PublicKey as SolanaPublicKey } from "@solana/web3.js";
 import { defaultAuthenticationFunction } from "./shared";
 import {
-  signAptosMessageWithSolana,
+  signCedraMessageWithSolana,
   StructuredMessageInputWithChainId,
-} from "./signAptosMessage";
-import { signAptosTransactionWithSolana } from "./signAptosTransaction";
+} from "./signCedraMessage";
+import { signCedraTransactionWithSolana } from "./signCedraTransaction";
 import { SolanaDerivedPublicKey } from "./SolanaDerivedPublicKey";
 
-export type SolanaWalletAdapterWithAptosFeatures = SolanaWalletAdapter & {
-  getAptosPublicKey: (
+export type SolanaWalletAdapterWithCedraFeatures = SolanaWalletAdapter & {
+  getCedraPublicKey: (
     solanaPublicKey: SolanaPublicKey,
   ) => SolanaDerivedPublicKey;
-  signAptosTransaction: (
+  signCedraTransaction: (
     rawTransaction: AnyRawTransaction,
   ) => Promise<UserResponse<AccountAuthenticator>>;
-  signAptosMessage: (
+  signCedraMessage: (
     input: StructuredMessageInputWithChainId,
-  ) => Promise<UserResponse<AptosSignMessageOutput>>;
+  ) => Promise<UserResponse<CedraSignMessageOutput>>;
 };
 
 /**
- * Utility function for extending a SolanaWalletAdapter with Aptos features.
+ * Utility function for extending a SolanaWalletAdapter with Cedra features.
  * @param solanaWallet the source wallet adapter
  * @param authenticationFunction authentication function required for DAA
  *
@@ -35,29 +35,29 @@ export type SolanaWalletAdapterWithAptosFeatures = SolanaWalletAdapter & {
  * const extendedWallet = extendSolanaWallet(solanaWallet, authenticationFunction);
  *
  * const solanaSignature = await extendedWallet.signTransaction(solanaTransaction);
- * const aptosSignature = await extendedWallet.signAptosTransaction(aptosRawTransaction);
+ * const cedraSignature = await extendedWallet.signCedraTransaction(cedraRawTransaction);
  * ```
  */
 export function extendSolanaWallet(
   solanaWallet: SolanaWalletAdapter,
   authenticationFunction = defaultAuthenticationFunction,
 ) {
-  const extended = solanaWallet as SolanaWalletAdapterWithAptosFeatures;
-  extended.getAptosPublicKey = (solanaPublicKey: SolanaPublicKey) =>
+  const extended = solanaWallet as SolanaWalletAdapterWithCedraFeatures;
+  extended.getCedraPublicKey = (solanaPublicKey: SolanaPublicKey) =>
     new SolanaDerivedPublicKey({
       solanaPublicKey,
       domain: window.location.host,
       authenticationFunction,
     });
-  extended.signAptosTransaction = (rawTransaction: AnyRawTransaction) =>
-    signAptosTransactionWithSolana({
+  extended.signCedraTransaction = (rawTransaction: AnyRawTransaction) =>
+    signCedraTransactionWithSolana({
       solanaWallet,
       authenticationFunction,
       rawTransaction,
       domain: window.location.host,
     });
-  extended.signAptosMessage = (messageInput) => {
-    return signAptosMessageWithSolana({
+  extended.signCedraMessage = (messageInput) => {
+    return signCedraMessageWithSolana({
       solanaWallet,
       authenticationFunction,
       messageInput,

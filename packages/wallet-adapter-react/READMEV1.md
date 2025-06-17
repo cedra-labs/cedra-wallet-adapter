@@ -2,13 +2,13 @@
 
 # Wallet Adapter React Provider
 
-A react provider wrapper for the Aptos Wallet Adapter
+A react provider wrapper for the Cedra Wallet Adapter
 
 Dapps that want to use the adapter should install this package and other supported wallet packages.
 
 ### Support
 
-The react provider supports all [wallet standard](https://aptos.dev/guides/wallet-standard) functions and feature functions
+The react provider supports all [wallet standard](https://cedra.dev/guides/wallet-standard) functions and feature functions
 
 ##### Standard functions
 
@@ -35,18 +35,18 @@ signAndSubmitBCSTransaction
 #### Install Dependencies
 
 Install wallet dependencies you want to include in your app.
-To do that, you can look at our [supported wallets list](https://github.com/aptos-labs/aptos-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
+To do that, you can look at our [supported wallets list](https://github.com/cedra-labs/cedra-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
 
-Next, install the `@aptos-labs/wallet-adapter-react`
+Next, install the `@cedra-labs/wallet-adapter-react`
 
 ```
-pnpm i @aptos-labs/wallet-adapter-react
+pnpm i @cedra-labs/wallet-adapter-react
 ```
 
 using npm
 
 ```
-npm i @aptos-labs/wallet-adapter-react
+npm i @cedra-labs/wallet-adapter-react
 ```
 
 #### Import dependencies
@@ -56,21 +56,21 @@ On the `App.jsx` file,
 Import the installed wallets.
 
 ```js
-import { SomeAptosWallet } from "some-aptos-wallet-package";
+import { SomeCedraWallet } from "some-cedra-wallet-package";
 ```
 
-Import the `AptosWalletAdapterProvider`.
+Import the `CedraWalletAdapterProvider`.
 
 ```js
-import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
+import { CedraWalletAdapterProvider } from "@cedra-labs/wallet-adapter-react";
 ```
 
 Wrap your app with the Provider, pass it the `plugins (wallets)` you want to have on your app as an array and a `autoConnect` option (set to false by default)
 
 ```js
-const wallets = [new AptosWallet()];
+const wallets = [new CedraWallet()];
 
-<AptosWalletAdapterProvider
+<CedraWalletAdapterProvider
   plugins={wallets}
   autoConnect={true}
   onError={(error) => {
@@ -78,15 +78,15 @@ const wallets = [new AptosWallet()];
   }}
 >
   <App />
-</AptosWalletAdapterProvider>;
+</CedraWalletAdapterProvider>;
 ```
 
 #### Use Wallet
 
-On any page you want to use the wallet props, import `useWallet` from `@aptos-labs/wallet-adapter-react`
+On any page you want to use the wallet props, import `useWallet` from `@cedra-labs/wallet-adapter-react`
 
 ```js
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useWallet } from "@cedra-labs/wallet-adapter-react";
 ```
 
 Then you can use the exported properties
@@ -138,13 +138,13 @@ const onConnect = async (walletName) => {
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
       function: "0x1::coin::transfer",
-      type_arguments: ["0x1::aptos_coin::AptosCoin"],
+      type_arguments: ["0x1::cedra_coin::CedraCoin"],
       arguments: [account?.address, 1], // 1 is in Octas
     };
     const response = await signAndSubmitTransaction(payload);
     // if you want to wait for transaction
     try {
-      await aptosClient.waitForTransaction(response?.hash || "");
+      await cedraClient.waitForTransaction(response?.hash || "");
     } catch (error) {
       console.error(error);
     }
@@ -160,7 +160,7 @@ const onConnect = async (walletName) => {
 ```js
    const onSignAndSubmitBCSTransaction = async () => {
     const token = new TxnBuilderTypes.TypeTagStruct(
-      TxnBuilderTypes.StructTag.fromString("0x1::aptos_coin::AptosCoin")
+      TxnBuilderTypes.StructTag.fromString("0x1::cedra_coin::CedraCoin")
     );
     const entryFunctionBCSPayload =
       new TxnBuilderTypes.TransactionPayloadEntryFunction(
@@ -180,7 +180,7 @@ const onConnect = async (walletName) => {
     const response = await signAndSubmitBCSTransaction(entryFunctionBCSPayload);
     // if you want to wait for transaction
     try {
-      await aptosClient.waitForTransaction(response?.hash || "");
+      await cedraClient.waitForTransaction(response?.hash || "");
     } catch (error) {
       console.error(error);
     }
@@ -196,7 +196,7 @@ const onConnect = async (walletName) => {
 ```js
 const onSignMessage = async () => {
   const payload = {
-    message: "Hello from Aptos Wallet Adapter",
+    message: "Hello from Cedra Wallet Adapter",
     nonce: "random_string",
   };
   const response = await signMessage(payload);
@@ -241,7 +241,7 @@ const onSignMessage = async () => {
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
       function: "0x1::coin::transfer",
-      type_arguments: ["0x1::aptos_coin::AptosCoin"],
+      type_arguments: ["0x1::cedra_coin::CedraCoin"],
       arguments: [account?.address, 1], // 1 is in Octas
     };
     const response = await signTransaction(payload);
@@ -257,7 +257,7 @@ const onSignMessage = async () => {
 ```js
 const onSignMessageAndVerify = async () => {
   const payload = {
-    message: "Hello from Aptos Wallet Adapter",
+    message: "Hello from Cedra Wallet Adapter",
     nonce: "random_string",
   };
   const response = await signMessageAndVerify(payload);

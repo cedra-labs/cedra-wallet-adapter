@@ -5,7 +5,7 @@ import {
   WalletItem,
   WalletInstallLink,
   isInstallRequired as _isInstallRequired,
-} from "@aptos-labs/wallet-adapter-vue";
+} from "@cedra-labs/wallet-adapter-vue";
 import { computed, toRefs } from "vue";
 
 interface Props {

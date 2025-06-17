@@ -5,12 +5,12 @@ import { SingleSigner } from "@/components/transactionFlows/SingleSigner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 // Imports for registering a browser extension wallet plugin on page load
 import { MyWallet } from "@/utils/standardWallet";
-import { Network } from "@aptos-labs/ts-sdk";
+import { Network } from "@cedra-labs/ts-sdk";
 import {
   OriginWalletDetails,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
-import { registerWallet } from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/wallet-adapter-react";
+import { registerWallet } from "@cedra-labs/wallet-standard";
 import { init as initTelegram } from "@telegram-apps/sdk";
 import { AlertCircle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -66,11 +66,11 @@ export default function Home() {
       <div className="flex justify-between gap-6 pb-10">
         <div className="flex flex-col gap-2 md:gap-3">
           <h1 className="text-xl sm:text-3xl font-semibold tracking-tight">
-            Aptos X-Chain Wallet Adapter Tester
+            Cedra X-Chain Wallet Adapter Tester
             {network?.name ? ` — ${network.name}` : ""}
           </h1>
           <a
-            href="https://github.com/aptos-labs/aptos-wallet-adapter/tree/main/apps/nextjs-x-chain-example"
+            href="https://github.com/cedra-labs/cedra-wallet-adapter/tree/main/apps/nextjs-x-chain-example"
             target="_blank"
             rel="noreferrer"
             className="text-sm text-muted-foreground underline underline-offset-2 font-medium leading-none"

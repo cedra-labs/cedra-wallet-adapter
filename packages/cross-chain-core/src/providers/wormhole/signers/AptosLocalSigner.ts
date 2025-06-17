@@ -1,11 +1,11 @@
 import {
   AccountAuthenticator,
   AnyRawTransaction,
-  Aptos,
-  AptosConfig,
-  Network as AptosNetwork,
+  Cedra,
+  CedraConfig,
+  Network as CedraNetwork,
   Account,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 
 import {
   Chain,
@@ -15,12 +15,12 @@ import {
   UnsignedTransaction,
 } from "@wormhole-foundation/sdk";
 import {
-  AptosUnsignedTransaction,
-  AptosChains,
-} from "@wormhole-foundation/sdk-aptos";
+  CedraUnsignedTransaction,
+  CedraChains,
+} from "@wormhole-foundation/sdk-cedra";
 import { GasStationApiKey } from "../types";
 
-export class AptosLocalSigner<N extends Network, C extends Chain>
+export class CedraLocalSigner<N extends Network, C extends Chain>
   implements SignAndSendSigner<N, C>
 {
   _chain: C;
@@ -59,7 +59,7 @@ export class AptosLocalSigner<N extends Network, C extends Chain>
 
     for (const tx of txs) {
       const txId = await signAndSendTransaction(
-        tx as AptosUnsignedTransaction<Network, AptosChains>,
+        tx as CedraUnsignedTransaction<Network, CedraChains>,
         this._wallet,
         this._sponsorAccount,
       );
@@ -71,7 +71,7 @@ export class AptosLocalSigner<N extends Network, C extends Chain>
 }
 
 export async function signAndSendTransaction(
-  request: UnsignedTransaction<Network, AptosChains>,
+  request: UnsignedTransaction<Network, CedraChains>,
   wallet: Account,
   sponsorAccount: Account | GasStationApiKey | undefined,
 ) {
@@ -91,17 +91,17 @@ export async function signAndSendTransaction(
     }
   });
 
-  const aptosConfig = new AptosConfig({
-    network: AptosNetwork.TESTNET,
+  const cedraConfig = new CedraConfig({
+    network: CedraNetwork.TESTNET,
   });
-  const aptos = new Aptos(aptosConfig);
+  const cedra = new Cedra(cedraConfig);
 
-  const txnToSign = await aptos.transaction.build.simple({
+  const txnToSign = await cedra.transaction.build.simple({
     data: payload,
     sender: wallet.accountAddress.toString(),
     withFeePayer: sponsorAccount ? true : false,
   });
-  const senderAuthenticator = await aptos.transaction.sign({
+  const senderAuthenticator = await cedra.transaction.sign({
     signer: wallet,
     transaction: txnToSign,
   });
@@ -119,16 +119,16 @@ export async function signAndSendTransaction(
     if (typeof sponsorAccount === "string") {
       // TODO: handle gas station integration here
     } else {
-      const feePayerSignerAuthenticator = aptos.transaction.signAsFeePayer({
+      const feePayerSignerAuthenticator = cedra.transaction.signAsFeePayer({
         signer: sponsorAccount as Account,
         transaction: txnToSign,
       });
       txnToSubmit.feePayerAuthenticator = feePayerSignerAuthenticator;
     }
   }
-  const response = await aptos.transaction.submit.simple(txnToSubmit);
+  const response = await cedra.transaction.submit.simple(txnToSubmit);
 
-  const tx = await aptos.waitForTransaction({
+  const tx = await cedra.waitForTransaction({
     transactionHash: response.hash,
   });
 

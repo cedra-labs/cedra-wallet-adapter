@@ -2,13 +2,13 @@
 
 # Wallet Adapter Vue
 
-A vue provider wrapper for the Aptos Wallet Adapter
+A vue provider wrapper for the Cedra Wallet Adapter
 
 Dapps that want to use the adapter should install this package and other supported wallet packages.
 
 ### Support
 
-The react provider supports all [wallet standard](https://aptos.dev/guides/wallet-standard) functions and feature functions
+The react provider supports all [wallet standard](https://cedra.dev/guides/wallet-standard) functions and feature functions
 
 ##### Standard functions
 
@@ -35,18 +35,18 @@ signAndSubmitBCSTransaction
 #### Install Dependencies
 
 Install wallet dependencies you want to include in your app.
-To do that, you can look at our [supported wallets list](https://github.com/aptos-labs/aptos-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
+To do that, you can look at our [supported wallets list](https://github.com/cedra-labs/cedra-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
 
-Next, install the `@aptos-labs/wallet-adapter-vue`
+Next, install the `@cedra-labs/wallet-adapter-vue`
 
 ```
-pnpm i @aptos-labs/wallet-adapter-vue
+pnpm i @cedra-labs/wallet-adapter-vue
 ```
 
 using npm
 
 ```
-npm i @aptos-labs/wallet-adapter-vue
+npm i @cedra-labs/wallet-adapter-vue
 ```
 
 #### Usage
@@ -56,11 +56,11 @@ npm i @aptos-labs/wallet-adapter-vue
 To use Wallet Adapter for Vue in a Nuxt 3 project, you need to create client-side plugin for it (e.g., `plugins/wallet.client.ts`)
 
 ```js
-import { SomeAptosWallet } from "some-aptos-wallet-package";
-import { useWallet } from "@aptos-labs/wallet-adapter-vue";
+import { SomeCedraWallet } from "some-cedra-wallet-package";
+import { useWallet } from "@cedra-labs/wallet-adapter-vue";
 
 export default defineNuxtPlugin({
-    const wallets = [new SomeAptosWallet()];
+    const wallets = [new SomeCedraWallet()];
 
     return {
         provide: {
@@ -107,12 +107,12 @@ const {
 Create plugin for it (e.g., `plugins/wallet.ts`)
 
 ```js
-import { SomeAptosWallet } from "some-aptos-wallet-package";
-import { useWallet } from "@aptos-labs/wallet-adapter-vue";
+import { SomeCedraWallet } from "some-cedra-wallet-package";
+import { useWallet } from "@cedra-labs/wallet-adapter-vue";
 
 export default {
   install(app: App) {
-  const wallets = [new SomeAptosWallet()];
+  const wallets = [new SomeCedraWallet()];
 
     const wallet = useWallet({
       plugins: wallets,
@@ -186,13 +186,13 @@ const onConnect = async (walletName) => {
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
       function: "0x1::coin::transfer",
-      type_arguments: ["0x1::aptos_coin::AptosCoin"],
+      type_arguments: ["0x1::cedra_coin::CedraCoin"],
       arguments: [account?.address, 1], // 1 is in Octas
     };
     const response = await signAndSubmitTransaction(payload);
     // if you want to wait for transaction
     try {
-      await aptosClient.waitForTransaction(response?.hash || "");
+      await cedraClient.waitForTransaction(response?.hash || "");
     } catch (error) {
       console.error(error);
     }
@@ -208,7 +208,7 @@ const onConnect = async (walletName) => {
 ```js
    const onSignAndSubmitBCSTransaction = async () => {
     const token = new TxnBuilderTypes.TypeTagStruct(
-      TxnBuilderTypes.StructTag.fromString("0x1::aptos_coin::AptosCoin")
+      TxnBuilderTypes.StructTag.fromString("0x1::cedra_coin::CedraCoin")
     );
     const entryFunctionBCSPayload =
       new TxnBuilderTypes.TransactionPayloadEntryFunction(
@@ -228,7 +228,7 @@ const onConnect = async (walletName) => {
     const response = await signAndSubmitBCSTransaction(entryFunctionBCSPayload);
     // if you want to wait for transaction
     try {
-      await aptosClient.waitForTransaction(response?.hash || "");
+      await cedraClient.waitForTransaction(response?.hash || "");
     } catch (error) {
       console.error(error);
     }
@@ -244,7 +244,7 @@ const onConnect = async (walletName) => {
 ```js
 const onSignMessage = async () => {
   const payload = {
-    message: "Hello from Aptos Wallet Adapter",
+    message: "Hello from Cedra Wallet Adapter",
     nonce: "random_string",
   };
   const response = await signMessage(payload);
@@ -287,7 +287,7 @@ const onSignMessage = async () => {
     const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function: "0x1::coin::transfer",
-        type_arguments: ["0x1::aptos_coin::AptosCoin"],
+        type_arguments: ["0x1::cedra_coin::CedraCoin"],
         arguments: [account?.address, 1], // 1 is in Octas
     };
     const response = await signTransaction(payload);
@@ -303,7 +303,7 @@ const onSignMessage = async () => {
 ```js
 const onSignMessageAndVerify = async () => {
     const payload = {
-        message: "Hello from Aptos Wallet Adapter",
+        message: "Hello from Cedra Wallet Adapter",
         nonce: "random_string",
     };
     const response = await signMessageAndVerify(payload);

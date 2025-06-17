@@ -1,7 +1,7 @@
 {
-  "name": "@aptos-labs/wallet-adapter-ant-design",
+  "name": "@cedra-labs/wallet-adapter-ant-design",
   "version": "4.0.19",
-  "description": "Aptos Wallet Adapter ant-design",
+  "description": "Cedra Wallet Adapter ant-design",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -19,16 +19,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter.git"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-wallet-adapter",
+  "homepage": "https://github.com/cedra-labs/cedra-wallet-adapter",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter/issues"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "cedralabs.com",
   "keywords": [
-    "Aptos",
-    "Aptos Labs",
+    "Cedra",
+    "Cedra Labs",
     "Wallet",
     "Wallet Adapter",
     "Wallet Adapter Provider",
@@ -41,7 +41,7 @@
     "lint": "TIMING=1 eslint \"src/**/*.ts*\""
   },
   "devDependencies": {
-    "@aptos-labs/wallet-adapter-tsconfig": "workspace:*",
+    "@cedra-labs/wallet-adapter-tsconfig": "workspace:*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.15.0",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
-    "@aptos-labs/wallet-adapter-react": "workspace:*",
+    "@cedra-labs/wallet-adapter-react": "workspace:*",
     "antd": "^5.18.3"
   },
   "peerDependencies": {

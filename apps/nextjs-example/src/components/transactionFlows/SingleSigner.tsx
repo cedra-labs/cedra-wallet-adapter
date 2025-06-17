@@ -1,13 +1,13 @@
-import { isSendableNetwork, aptosClient } from "@/utils";
-import { parseTypeTag, AccountAddress, U64 } from "@aptos-labs/ts-sdk";
-import { InputTransactionData } from "@aptos-labs/wallet-adapter-core";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { isSendableNetwork, cedraClient } from "@/utils";
+import { parseTypeTag, AccountAddress, U64 } from "@cedra-labs/ts-sdk";
+import { InputTransactionData } from "@cedra-labs/wallet-adapter-core";
+import { useWallet } from "@cedra-labs/wallet-adapter-react";
 import { Button } from "../ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { useToast } from "../ui/use-toast";
 import { TransactionHash } from "../TransactionHash";
 
-const APTOS_COIN = "0x1::aptos_coin::AptosCoin";
+const CEDRA_COIN = "0x1::cedra_coin::CedraCoin";
 
 /**
  * Generate a nonce with alphanumeric characters only.
@@ -32,7 +32,7 @@ export function SingleSigner() {
 
   const onSignMessageAndVerify = async () => {
     const payload = {
-      message: "Hello from Aptos Wallet Adapter",
+      message: "Hello from Cedra Wallet Adapter",
       nonce: generateNonce(),
     };
     const response = await signMessageAndVerify(payload);
@@ -44,7 +44,7 @@ export function SingleSigner() {
 
   const onSignMessage = async () => {
     const payload = {
-      message: "Hello from Aptos Wallet Adapter",
+      message: "Hello from Cedra Wallet Adapter",
       nonce: generateNonce(),
     };
     const response = await signMessage(payload);
@@ -59,13 +59,13 @@ export function SingleSigner() {
     const transaction: InputTransactionData = {
       data: {
         function: "0x1::coin::transfer",
-        typeArguments: [APTOS_COIN],
+        typeArguments: [CEDRA_COIN],
         functionArguments: [account.address, 1], // 1 is in Octas
       },
     };
     try {
       const response = await signAndSubmitTransaction(transaction);
-      await aptosClient(network).waitForTransaction({
+      await cedraClient(network).waitForTransaction({
         transactionHash: response.hash,
       });
       toast({
@@ -89,7 +89,7 @@ export function SingleSigner() {
     };
     try {
       const response = await signAndSubmitTransaction(transaction);
-      await aptosClient(network).waitForTransaction({
+      await cedraClient(network).waitForTransaction({
         transactionHash: response.hash,
       });
       toast({
@@ -108,11 +108,11 @@ export function SingleSigner() {
       const response = await signAndSubmitTransaction({
         data: {
           function: "0x1::coin::transfer",
-          typeArguments: [parseTypeTag(APTOS_COIN)],
+          typeArguments: [parseTypeTag(CEDRA_COIN)],
           functionArguments: [AccountAddress.from(account.address), new U64(1)], // 1 is in Octas
         },
       });
-      await aptosClient(network).waitForTransaction({
+      await cedraClient(network).waitForTransaction({
         transactionHash: response.hash,
       });
       toast({
@@ -130,7 +130,7 @@ export function SingleSigner() {
       const payload: InputTransactionData = {
         data: {
           function: "0x1::coin::transfer",
-          typeArguments: [APTOS_COIN],
+          typeArguments: [CEDRA_COIN],
           functionArguments: [account?.address.toString(), 1],
         },
       };
@@ -150,13 +150,13 @@ export function SingleSigner() {
     if (!account) return;
 
     try {
-      const transactionToSign = await aptosClient(
+      const transactionToSign = await cedraClient(
         network,
       ).transaction.build.simple({
         sender: account.address,
         data: {
           function: "0x1::coin::transfer",
-          typeArguments: [APTOS_COIN],
+          typeArguments: [CEDRA_COIN],
           functionArguments: [account.address.toString(), 1],
         },
       });

@@ -1,5 +1,5 @@
 {
-  "name": "@aptos-labs/wallet-adapter",
+  "name": "@cedra-labs/wallet-adapter",
   "version": "0.0.0",
   "private": true,
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "vue-example:build": "pnpm run --filter {apps/nuxt-example} build"
   },
   "devDependencies": {
-    "@aptos-labs/eslint-config-adapter": "workspace:*",
+    "@cedra-labs/eslint-config-adapter": "workspace:*",
     "@changesets/cli": "^2.22.0",
     "prettier": "latest",
     "turbo": "latest"
@@ -43,7 +43,7 @@
   "packageManager": "pnpm@9.15.5",
   "pnpm": {
     "overrides": {
-      "@aptos-labs/aptos-client": "^1.2.0"
+      "@cedra-labs/cedra-client": "^1.2.0"
     }
   }
 }

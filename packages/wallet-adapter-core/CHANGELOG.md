@@ -1,4 +1,4 @@
-# @aptos-labs/wallet-adapter-core
+# @cedra-labs/wallet-adapter-core
 
 ## 5.5.1
 
@@ -14,13 +14,13 @@
 
 ### Patch Changes
 
-- 69f2846: Bump @aptos-labs/wallet-standard version to 0.4.0
+- 69f2846: Bump @cedra-labs/wallet-standard version to 0.4.0
 
 ## 5.4.2
 
 ### Patch Changes
 
-- 33d0055: Use aptos ts-sdk version 2.0.0 as a peer dependency
+- 33d0055: Use cedra ts-sdk version 2.0.0 as a peer dependency
 
 ## 5.4.1
 
@@ -79,19 +79,19 @@
 
 ### Minor Changes
 
-- f11ea12: Add support for aptos:signIn feature
+- f11ea12: Add support for cedra:signIn feature
 
 ## 5.0.2
 
 ### Patch Changes
 
-- 62d860d: Update @aptos-connect/wallet-adapter-plugin to 2.4.1
+- 62d860d: Update @cedra-connect/wallet-adapter-plugin to 2.4.1
 
 ## 5.0.1
 
 ### Patch Changes
 
-- 792dadf: Update @aptos-labs/wallet-standard to 0.3.0 and @aptos-connect/wallet-adapter-plugin to 2.4.0
+- 792dadf: Update @cedra-labs/wallet-standard to 0.3.0 and @cedra-connect/wallet-adapter-plugin to 2.4.0
 
 ## 5.0.0
 
@@ -150,32 +150,32 @@
 
 ### Patch Changes
 
-- 6915184: @mizuwallet-sdk/aptos-wallet-adapter Bump version to 0.3.2
+- 6915184: @mizuwallet-sdk/cedra-wallet-adapter Bump version to 0.3.2
 
 ## 4.20.0
 
 ### Minor Changes
 
-- f5ba2f2: Bump `@aptos-connect/wallet-adapter-plugin` to 2.3.2 to support Apple logins
+- f5ba2f2: Bump `@cedra-connect/wallet-adapter-plugin` to 2.3.2 to support Apple logins
 
 ## 4.19.0
 
 ### Minor Changes
 
-- 66ad437: Bumped the Aptos Connect plugin to support claims
+- 66ad437: Bumped the Cedra Connect plugin to support claims
 
 ## 4.18.1
 
 ### Patch Changes
 
-- 737bd2b: Bump @mizuwallet-sdk/aptos-wallet-adapter to v0.3.1 and add '--experimental-https' flag to nextjs-example's dev command.
-- f9ecf18: Bump @aptos-labs/wallet-adapter-core version to v0.2.6
+- 737bd2b: Bump @mizuwallet-sdk/cedra-wallet-adapter to v0.3.1 and add '--experimental-https' flag to nextjs-example's dev command.
+- f9ecf18: Bump @cedra-labs/wallet-adapter-core version to v0.2.6
 
 ## 4.18.0
 
 ### Minor Changes
 
-- 67440bf: Bumped `@aptos-connect/wallet-adapter-plugin` to 2.1.0 to enable Telegram support
+- 67440bf: Bumped `@cedra-connect/wallet-adapter-plugin` to 2.1.0 to enable Telegram support
 - bde8112: Handle arguments conversion when submitting a package publish transaction
 
 ## 4.17.0
@@ -183,11 +183,11 @@
 ### Minor Changes
 
 - e252fce: Add support for a dapp generated api key
-- bd54d77: Bumped `@aptos-connect/wallet-adapter-plugin` to 2.0.2 and exposed `preferredWalletName` option
+- bd54d77: Bumped `@cedra-connect/wallet-adapter-plugin` to 2.0.2 and exposed `preferredWalletName` option
 
 ### Patch Changes
 
-- d348384: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.2.5
+- d348384: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.2.5
 
 ## 4.16.0
 
@@ -199,8 +199,8 @@
 
 ### Patch Changes
 
-- 3419043: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.2.3
-- ee95b8b: Upgrade @aptos-labe/ts-sdk version
+- 3419043: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.2.3
+- ee95b8b: Upgrade @cedra-labe/ts-sdk version
 
 ## 4.15.0
 
@@ -210,24 +210,24 @@
 
 ### Patch Changes
 
-- 92f7187: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.2.0
+- 92f7187: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.2.0
 
 ## 4.14.0
 
 ### Minor Changes
 
-- 4240f8b: Have the option to exclude AptosConnect from the wallet selector modal
+- 4240f8b: Have the option to exclude CedraConnect from the wallet selector modal
 
 ### Patch Changes
 
-- 0e37588: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.1.5
+- 0e37588: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.1.5
 
 ## 4.13.2
 
 ### Patch Changes
 
-- 754f6e1: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.1.2
-- 754f6e1: Bump @mizuwallet-sdk/aptos-wallet-adapter version to 0.1.3
+- 754f6e1: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.1.2
+- 754f6e1: Bump @mizuwallet-sdk/cedra-wallet-adapter version to 0.1.3
 
 ## 4.13.1
 
@@ -273,7 +273,7 @@
 
 ### Minor Changes
 
-- 6bfeb14: Add dapp id to be passed to AptosConnect
+- 6bfeb14: Add dapp id to be passed to CedraConnect
 
 ### Patch Changes
 
@@ -291,20 +291,20 @@
 
 ### Patch Changes
 
-- 79a0212: Bumped to `@aptos-connect/wallet-adapter-plugin` v1.0.1
+- 79a0212: Bumped to `@cedra-connect/wallet-adapter-plugin` v1.0.1
 
 ## 4.8.1
 
 ### Patch Changes
 
-- 1644cfc: use isAptosConnectWallet function to verify a wallet is an AptosConnect wallet in excludeWallet function
+- 1644cfc: use isCedraConnectWallet function to verify a wallet is an CedraConnect wallet in excludeWallet function
 - cbbbe23: Added Dapp id to dappConfig
 
 ## 4.8.0
 
 ### Minor Changes
 
-- e3df2db: Added the following utility functions: `getAptosConnectWallets`, `partitionWallets`, `isInstalledOrLoadable`, `isInstallRequired`, and `truncateAddress`.
+- e3df2db: Added the following utility functions: `getCedraConnectWallets`, `partitionWallets`, `isInstalledOrLoadable`, `isInstallRequired`, and `truncateAddress`.
 - 1580df8: Add Petra to the AIP-62 wallet registry
 
 ## 4.7.0
@@ -317,29 +317,29 @@
 
 ### Minor Changes
 
-- 0672ff4: Added `APTOS_CONNECT_BASE_URL`, `APTOS_CONNECT_ACCOUNT_URL`, and `isAptosConnectWallet`
+- 0672ff4: Added `CEDRA_CONNECT_BASE_URL`, `CEDRA_CONNECT_ACCOUNT_URL`, and `isCedraConnectWallet`
 
 ## 4.5.0
 
 ### Minor Changes
 
-- c1a9f41: Bumped auto-injected AptosConnect plugin version
+- c1a9f41: Bumped auto-injected CedraConnect plugin version
 
 ## 4.4.0
 
 ### Minor Changes
 
-- 2e9c156: Added `AnyAptosWallet` union type alias.
+- 2e9c156: Added `AnyCedraWallet` union type alias.
 
 ## 4.3.0
 
 ### Minor Changes
 
-- 79b1bf8: Add AptosConnect
+- 79b1bf8: Add CedraConnect
 
 ### Patch Changes
 
-- 9566c50: Bumped @aptos-connect/wallet-adapter-plugin version to include args normalization fix
+- 9566c50: Bumped @cedra-connect/wallet-adapter-plugin version to include args normalization fix
 
 ## 4.2.1
 
@@ -358,7 +358,7 @@
 ### Patch Changes
 
 - cc4021b: Add the `local` case to the switch statement that converts a string to a Network.
-- ec6cb0c: it bumps @atomrigslab/aptos-wallet-adapter version to fixe redirection issue with Twallet URL
+- ec6cb0c: it bumps @atomrigslab/cedra-wallet-adapter version to fixe redirection issue with Twallet URL
 
 ## 4.1.2
 
@@ -437,7 +437,7 @@
 
 ### Patch Changes
 
-- 55f9970: Update aptos ts-sdk to latest version 1.13.2
+- 55f9970: Update cedra ts-sdk to latest version 1.13.2
 
 ## 3.11.0
 
@@ -473,7 +473,7 @@
 
 ### Minor Changes
 
-- 8ebd4c7: Upgrade Aptos ts sdk version to 1.6.0
+- 8ebd4c7: Upgrade Cedra ts sdk version to 1.6.0
 
 ## 3.5.0
 
@@ -491,7 +491,7 @@
 
 ### Minor Changes
 
-- 570cbda: Update @aptos-labs/ts-sdk package version to 1.3.0
+- 570cbda: Update @cedra-labs/ts-sdk package version to 1.3.0
 
 ## 3.2.1
 
@@ -519,7 +519,7 @@
 
 ### Minor Changes
 
-- 6257015: [deps] Updated aptos and @aptos-labs/ts-sdk dependencies to latest versions
+- 6257015: [deps] Updated cedra and @cedra-labs/ts-sdk dependencies to latest versions
 - aa3d15a: Make sender optional when sign and submit single signer transaction
 
 ## 3.0.0
@@ -536,13 +536,13 @@
   - Convert wallet `SignedTransaction` response from `signTransaction()` to TS SDK V2 `AccountAuthenticator`
   - Demo app to demonstrate different trnsaction flows - single signer, sponsor and multi agent transactions
   - Reject promise on core and/or provider errors instead of just returning `false`
-  - Use `@aptos-labs/ts-sdk@experimental` version `0.0.7`
+  - Use `@cedra-labs/ts-sdk@experimental` version `0.0.7`
 
 ## 2.6.0
 
 ### Minor Changes
 
-- 7acfa69: Adding support for the new Typescript SDK in the package `@aptos-labs/ts-sdk`. The wallet adapter now supports submitting a basic transaction with the new SDK types.
+- 7acfa69: Adding support for the new Typescript SDK in the package `@cedra-labs/ts-sdk`. The wallet adapter now supports submitting a basic transaction with the new SDK types.
 
 ### Patch Changes
 
@@ -552,7 +552,7 @@
 
 ### Patch Changes
 
-- 7e314e5: Update aptos dependency
+- 7e314e5: Update cedra dependency
 
 ## 2.5.0
 
@@ -586,10 +586,10 @@
 
 ### Patch Changes
 
-- 06f334f: @aptos-labs/wallet-adapter-core:
+- 06f334f: @cedra-labs/wallet-adapter-core:
   Fixes ssr issue with checking for mobile wallets
 
-  @aptos-labs/wallet-adapter-mui-design:
+  @cedra-labs/wallet-adapter-mui-design:
   Breaking:
   When on a mobile phone on the native browser, we removed all wallets that are not able to be deep linked to.
   The previous functionally would take them to the extension, which would not help users on mobile phones.
@@ -599,7 +599,7 @@
 ### Minor Changes
 
 - bb1595e: Fix deeplink redirect
-- 1605d28: Support ReadonlyArray of Wallets in AptosWalletAdapterProvider and WalletCore
+- 1605d28: Support ReadonlyArray of Wallets in CedraWalletAdapterProvider and WalletCore
 
 ## 2.2.0
 

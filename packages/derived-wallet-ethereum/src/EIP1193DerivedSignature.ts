@@ -4,7 +4,7 @@ import {
   HexInput,
   Serializer,
   Signature,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 
 export class EIP1193DerivedSignature extends Signature {
   static readonly LENGTH = 65;

@@ -6,7 +6,7 @@ import {
   SignAndSendSigner,
 } from "@wormhole-foundation/sdk";
 import { SolanaUnsignedTransaction } from "@wormhole-foundation/sdk-solana";
-import { AdapterWallet } from "@aptos-labs/wallet-adapter-core";
+import { AdapterWallet } from "@cedra-labs/wallet-adapter-core";
 import {
   EvmUnsignedTransaction,
   EvmChains,

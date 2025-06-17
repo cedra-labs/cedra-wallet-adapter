@@ -5,17 +5,17 @@ import {
   AnyRawTransaction,
   InputTransactionData,
   NetworkInfo,
-  AptosSignMessageInput,
-  AptosSignMessageOutput,
+  CedraSignMessageInput,
+  CedraSignMessageOutput,
   AdapterNotDetectedWallet,
   Network,
-  AptosChangeNetworkOutput,
+  CedraChangeNetworkOutput,
   PendingTransactionResponse,
   InputSubmitTransactionData,
   AvailableWallets,
   WalletCore,
   WalletCoreEvents,
-} from "@aptos-labs/wallet-adapter-core";
+} from "@cedra-labs/wallet-adapter-core";
 import {
   ref,
   Ref,
@@ -49,19 +49,19 @@ export interface WalletContextState {
   submitTransaction(
     transaction: InputSubmitTransactionData,
   ): Promise<PendingTransactionResponse>;
-  signMessage(message: AptosSignMessageInput): Promise<AptosSignMessageOutput>;
-  signMessageAndVerify(message: AptosSignMessageInput): Promise<boolean>;
-  changeNetwork(network: Network): Promise<AptosChangeNetworkOutput>;
+  signMessage(message: CedraSignMessageInput): Promise<CedraSignMessageOutput>;
+  signMessageAndVerify(message: CedraSignMessageInput): Promise<boolean>;
+  changeNetwork(network: Network): Promise<CedraChangeNetworkOutput>;
 }
 
-export interface AptosWalletProviderProps {
+export interface CedraWalletProviderProps {
   disableTelemetry?: boolean;
   optInWallets?: ReadonlyArray<AvailableWallets>;
   dappConfig?: { network: Network };
   onError?: (error: any) => void;
 }
 
-const LOCAL_STORAGE_KEY = "AptosWalletName";
+const LOCAL_STORAGE_KEY = "CedraWalletName";
 
 const initialState: {
   account: AccountInfo | null;
@@ -100,12 +100,12 @@ function getWalletCoreInstance(
 
 /**
  *
- * @param {AptosWalletProviderProps} props - Optional object with properties for
+ * @param {CedraWalletProviderProps} props - Optional object with properties for
  * configuring the wallet adapter.
  * @return {WalletContextState}
  */
 export function useWallet(
-  props?: AptosWalletProviderProps,
+  props?: CedraWalletProviderProps,
 ): WalletContextState {
   const { disableTelemetry, optInWallets, dappConfig, onError } = props ?? {};
 
@@ -155,8 +155,8 @@ export function useWallet(
   };
 
   const signMessage = async (
-    message: AptosSignMessageInput,
-  ): Promise<AptosSignMessageOutput> => {
+    message: CedraSignMessageInput,
+  ): Promise<CedraSignMessageOutput> => {
     try {
       return await walletCoreInstance.signMessage(message);
     } catch (error: any) {
@@ -166,7 +166,7 @@ export function useWallet(
   };
 
   const signMessageAndVerify = async (
-    message: AptosSignMessageInput,
+    message: CedraSignMessageInput,
   ): Promise<boolean> => {
     try {
       return await walletCoreInstance.signMessageAndVerify(message);

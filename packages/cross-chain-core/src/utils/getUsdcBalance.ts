@@ -1,8 +1,8 @@
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import { Cedra, CedraConfig, Network } from "@cedra-labs/ts-sdk";
 import { Connection, PublicKey } from "@solana/web3.js";
 import {
-  AptosMainnetUSDCToken,
-  AptosTestnetUSDCToken,
+  CedraMainnetUSDCToken,
+  CedraTestnetUSDCToken,
   mainnetTokens,
   testnetTokens,
 } from "../config";
@@ -10,12 +10,12 @@ import { ethers, JsonRpcProvider } from "ethers";
 
 export const getSolanaWalletUSDCBalance = async (
   walletAddress: string,
-  aptosNetwork: Network,
+  cedraNetwork: Network,
   rpc: string,
 ): Promise<string> => {
   const address = new PublicKey(walletAddress);
   const tokenAddress =
-    aptosNetwork === Network.MAINNET
+    cedraNetwork === Network.MAINNET
       ? mainnetTokens["Solana"].tokenId.address
       : testnetTokens["Solana"].tokenId.address;
 
@@ -39,11 +39,11 @@ export const getSolanaWalletUSDCBalance = async (
 
 export const getEthereumWalletUSDCBalance = async (
   walletAddress: string,
-  aptosNetwork: Network,
+  cedraNetwork: Network,
   rpc: string,
 ): Promise<string> => {
   const token =
-    aptosNetwork === Network.MAINNET
+    cedraNetwork === Network.MAINNET
       ? mainnetTokens["Ethereum"]
       : testnetTokens["Sepolia"];
 
@@ -55,17 +55,17 @@ export const getEthereumWalletUSDCBalance = async (
   return ethers.formatUnits(balance, token.decimals).toString();
 };
 
-export const getAptosWalletUSDCBalance = async (
+export const getCedraWalletUSDCBalance = async (
   walletAddress: string,
-  aptosNetwork: Network,
+  cedraNetwork: Network,
 ): Promise<string> => {
   const token =
-    aptosNetwork === Network.MAINNET
-      ? AptosMainnetUSDCToken
-      : AptosTestnetUSDCToken;
+    cedraNetwork === Network.MAINNET
+      ? CedraMainnetUSDCToken
+      : CedraTestnetUSDCToken;
   const tokenAddress = token.tokenId.address;
-  const aptosConfig = new AptosConfig({ network: aptosNetwork });
-  const connection = new Aptos(aptosConfig);
+  const cedraConfig = new CedraConfig({ network: cedraNetwork });
+  const connection = new Cedra(cedraConfig);
   const response = await connection.getCurrentFungibleAssetBalances({
     options: {
       where: {

@@ -1,5 +1,5 @@
 {
-  "extends": "@aptos-labs/wallet-adapter-tsconfig/react-library.json",
+  "extends": "@cedra-labs/wallet-adapter-tsconfig/react-library.json",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

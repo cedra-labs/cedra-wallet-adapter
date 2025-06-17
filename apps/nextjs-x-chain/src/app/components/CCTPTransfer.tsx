@@ -8,34 +8,34 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChainConfig, CrossChainCore } from "@aptos-labs/cross-chain-core";
+import { ChainConfig, CrossChainCore } from "@cedra-labs/cross-chain-core";
 import {
   Account,
   Ed25519PrivateKey,
   Network,
   PrivateKey,
   PrivateKeyVariants,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import {
   Chain,
   WormholeInitiateTransferResponse,
   WormholeQuoteResponse,
-} from "@aptos-labs/cross-chain-core";
-import { SolanaDerivedWallet } from "@aptos-labs/derived-wallet-solana";
-import { AdapterWallet } from "@aptos-labs/wallet-adapter-core";
+} from "@cedra-labs/cross-chain-core";
+import { SolanaDerivedWallet } from "@cedra-labs/derived-wallet-solana";
+import { AdapterWallet } from "@cedra-labs/wallet-adapter-core";
 import { Loader2, MoveDown } from "lucide-react";
 import USDC from "@/app/icons/USDC";
 import { chainToIcon } from "@/app/icons";
-import { EIP1193DerivedWallet } from "@aptos-labs/derived-wallet-ethereum";
+import { EIP1193DerivedWallet } from "@cedra-labs/derived-wallet-ethereum";
 import {
   OriginWalletDetails,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 
 const dappNetwork: Network.MAINNET | Network.TESTNET = Network.TESTNET;
 
 const crossChainCore = new CrossChainCore({
-  dappConfig: { aptosNetwork: dappNetwork },
+  dappConfig: { cedraNetwork: dappNetwork },
 });
 const provider = crossChainCore.getProvider("Wormhole");
 
@@ -102,7 +102,7 @@ export function CCTPTransfer({
     } else if (wallet instanceof EIP1193DerivedWallet) {
       setSourceChain("Sepolia");
     } else {
-      setSourceChain("Aptos");
+      setSourceChain("Cedra");
     }
   }, [wallet]);
 
@@ -216,7 +216,7 @@ export function CCTPTransfer({
       <CardHeader>
         <CardTitle>CCTP transfer</CardTitle>
         <CardDescription>
-          Transfer USDC to your derived Aptos account
+          Transfer USDC to your derived Cedra account
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -292,8 +292,8 @@ export function CCTPTransfer({
                   }}
                 >
                   <img
-                    src={chainToIcon("Aptos")}
-                    alt="Aptos"
+                    src={chainToIcon("Cedra")}
+                    alt="Cedra"
                     height="32px"
                     width="32px"
                   />
@@ -356,13 +356,13 @@ export function CCTPTransfer({
             )}
             {transferResponse.destinationChainTxnId && (
               <a
-                href={`https://explorer.aptoslabs.com/txn/${transferResponse.destinationChainTxnId}?network=${
+                href={`https://explorer.cedralabs.com/txn/${transferResponse.destinationChainTxnId}?network=${
                   dappNetwork === Network.MAINNET ? "mainnet" : "testnet"
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <p className="text-md underline">View on Aptos Explorer</p>
+                <p className="text-md underline">View on Cedra Explorer</p>
               </a>
             )}
           </div>

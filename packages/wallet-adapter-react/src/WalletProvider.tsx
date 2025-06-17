@@ -5,32 +5,32 @@ import {
   AdapterWallet,
   NetworkInfo,
   InputTransactionData,
-  AptosSignAndSubmitTransactionOutput,
+  CedraSignAndSubmitTransactionOutput,
   AnyRawTransaction,
   InputGenerateTransactionOptions,
   AccountAuthenticator,
-  AptosSignMessageInput,
-  AptosSignMessageOutput,
+  CedraSignMessageInput,
+  CedraSignMessageOutput,
   AdapterNotDetectedWallet,
   WalletCore,
   Network,
   InputSubmitTransactionData,
   PendingTransactionResponse,
   WalletReadyState,
-  AptosSignInInput,
-  AptosSignInOutput,
-  AnyPublicKey as AptosAnyPublicKey,
+  CedraSignInInput,
+  CedraSignInOutput,
+  AnyPublicKey as CedraAnyPublicKey,
   AccountAddress,
-} from "@aptos-labs/wallet-adapter-core";
+} from "@cedra-labs/wallet-adapter-core";
 import { ReactNode, FC, useState, useEffect, useCallback, useRef } from "react";
 import { WalletContext } from "./useWallet";
 import {
   SolanaDerivedWallet,
   SolanaPublicKey,
-} from "@aptos-labs/derived-wallet-solana";
-import { EIP1193DerivedWallet } from "@aptos-labs/derived-wallet-ethereum";
+} from "@cedra-labs/derived-wallet-solana";
+import { EIP1193DerivedWallet } from "@cedra-labs/derived-wallet-ethereum";
 
-export interface AptosWalletProviderProps {
+export interface CedraWalletProviderProps {
   children: ReactNode;
   optInWallets?: ReadonlyArray<AvailableWallets>;
   autoConnect?:
@@ -44,7 +44,7 @@ export interface AptosWalletProviderProps {
 export type OriginWalletDetails =
   | {
       address: string | AccountAddress;
-      publicKey?: SolanaPublicKey | AptosAnyPublicKey | undefined;
+      publicKey?: SolanaPublicKey | CedraAnyPublicKey | undefined;
     }
   | AccountInfo
   | null;
@@ -61,14 +61,14 @@ const initialState: {
   wallet: null,
 };
 
-export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
+export const CedraWalletAdapterProvider: FC<CedraWalletProviderProps> = ({
   children,
   optInWallets,
   autoConnect = false,
   dappConfig,
   disableTelemetry = false,
   onError,
-}: AptosWalletProviderProps) => {
+}: CedraWalletProviderProps) => {
   const didAttemptAutoConnectRef = useRef(false);
 
   const [{ account, network, connected, wallet }, setState] =
@@ -111,7 +111,7 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
     }
 
     // Make sure the user has a previously connected wallet
-    const walletName = localStorage.getItem("AptosWalletName");
+    const walletName = localStorage.getItem("CedraWalletName");
     if (!walletName) {
       setIsLoading(false);
       return;
@@ -171,8 +171,8 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
 
   const signIn = async (args: {
     walletName: string;
-    input: AptosSignInInput;
-  }): Promise<void | AptosSignInOutput> => {
+    input: CedraSignInInput;
+  }): Promise<void | CedraSignInOutput> => {
     try {
       setIsLoading(true);
       return await walletCore?.signIn(args);
@@ -195,7 +195,7 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
 
   const signAndSubmitTransaction = async (
     transaction: InputTransactionData,
-  ): Promise<AptosSignAndSubmitTransactionOutput> => {
+  ): Promise<CedraSignAndSubmitTransactionOutput> => {
     try {
       if (!walletCore) {
         throw new Error("WalletCore is not initialized");
@@ -248,8 +248,8 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
   };
 
   const signMessage = async (
-    message: AptosSignMessageInput,
-  ): Promise<AptosSignMessageOutput> => {
+    message: CedraSignMessageInput,
+  ): Promise<CedraSignMessageOutput> => {
     if (!walletCore) {
       throw new Error("WalletCore is not initialized");
     }
@@ -262,7 +262,7 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
   };
 
   const signMessageAndVerify = async (
-    message: AptosSignMessageInput,
+    message: CedraSignMessageInput,
   ): Promise<boolean> => {
     if (!walletCore) {
       throw new Error("WalletCore is not initialized");
@@ -411,7 +411,7 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
   // Define specific return types based on wallet type
   type SolanaWalletDetails = { address: string; publicKey: SolanaPublicKey };
   type EVMWalletDetails = { address: string; publicKey?: undefined };
-  type AptosWalletDetails = AccountInfo | null;
+  type CedraWalletDetails = AccountInfo | null;
 
   // Function overloads
   function getOriginWalletDetails(
@@ -438,7 +438,7 @@ export const AptosWalletAdapterProvider: FC<AptosWalletProviderProps> = ({
         address: activeAccount.address,
       };
     } else {
-      // Assume Aptos Wallet
+      // Assume Cedra Wallet
       return undefined;
     }
   }

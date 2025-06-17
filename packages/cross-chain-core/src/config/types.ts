@@ -4,7 +4,7 @@ import { Chain } from "../CrossChainCore";
 export enum Context {
   ETH = "Ethereum",
   SOLANA = "Solana",
-  APTOS = "Aptos",
+  CEDRA = "Cedra",
 }
 
 export type BaseChainConfig = {

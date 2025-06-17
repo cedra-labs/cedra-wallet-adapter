@@ -31,11 +31,11 @@ export const testnetTokens: Record<string, TokenConfig> = {
   // },
 };
 
-export const AptosTestnetUSDCToken: TokenConfig = {
+export const CedraTestnetUSDCToken: TokenConfig = {
   symbol: "USDC",
   decimals: 6,
   tokenId: {
-    chain: "Aptos",
+    chain: "Cedra",
     address:
       "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832",
   },

@@ -1,15 +1,15 @@
 import {
-  AboutAptosConnect,
-  AboutAptosConnectEducationScreen,
+  AboutCedraConnect,
+  AboutCedraConnectEducationScreen,
   AdapterNotDetectedWallet,
   AdapterWallet,
-  AptosPrivacyPolicy,
+  CedraPrivacyPolicy,
   WalletItem,
   WalletSortingOptions,
   groupAndSortWallets,
   isInstallRequired,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 import {
   Box,
   Button,
@@ -23,7 +23,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { grey } from "./aptosColorPalette";
+import { grey } from "./cedraColorPalette";
 // reported bug with loading mui icons with esm, therefore need to import like this https://github.com/mui/material-ui/issues/35233
 import {
   ArrowBack,
@@ -54,13 +54,13 @@ export default function WalletsModal({
 
   const { wallets = [], notDetectedWallets = [] } = useWallet();
 
-  const { aptosConnectWallets, availableWallets, installableWallets } =
+  const { cedraConnectWallets, availableWallets, installableWallets } =
     groupAndSortWallets(
       [...wallets, ...notDetectedWallets],
       walletSortingOptions,
     );
 
-  const hasAptosConnectWallets = !!aptosConnectWallets.length;
+  const hasCedraConnectWallets = !!cedraConnectWallets.length;
 
   return (
     <Dialog
@@ -92,7 +92,7 @@ export default function WalletsModal({
         >
           <CloseIcon />
         </IconButton>
-        <AboutAptosConnect renderEducationScreen={renderEducationScreen}>
+        <AboutCedraConnect renderEducationScreen={renderEducationScreen}>
           <Typography
             align="center"
             variant="h5"
@@ -103,10 +103,10 @@ export default function WalletsModal({
               flexDirection: "column",
             }}
           >
-            {hasAptosConnectWallets ? (
+            {hasCedraConnectWallets ? (
               <>
                 <span>Log in or sign up</span>
-                <span>with Social + Aptos Connect</span>
+                <span>with Social + Cedra Connect</span>
               </>
             ) : (
               "Connect Wallet"
@@ -139,10 +139,10 @@ export default function WalletsModal({
               </Typography>
             </Box>
           )}
-          {hasAptosConnectWallets && (
+          {hasCedraConnectWallets && (
             <Stack gap={1}>
-              {aptosConnectWallets.map((wallet) => (
-                <AptosConnectWalletRow
+              {cedraConnectWallets.map((wallet) => (
+                <CedraConnectWalletRow
                   key={wallet.name}
                   wallet={wallet}
                   onConnect={handleClose}
@@ -161,7 +161,7 @@ export default function WalletsModal({
               >
                 Learn more about{" "}
                 <Box
-                  component={AboutAptosConnect.Trigger}
+                  component={AboutCedraConnect.Trigger}
                   sx={{
                     background: "none",
                     border: "none",
@@ -177,19 +177,19 @@ export default function WalletsModal({
                     appearance: "none",
                   }}
                 >
-                  Aptos Connect <ArrowForward sx={{ height: 16, width: 16 }} />
+                  Cedra Connect <ArrowForward sx={{ height: 16, width: 16 }} />
                 </Box>
               </Typography>
 
               <Stack
-                component={AptosPrivacyPolicy}
+                component={CedraPrivacyPolicy}
                 alignItems="center"
                 py={0.5}
               >
                 <Typography component="p" fontSize="12px" lineHeight="20px">
-                  <AptosPrivacyPolicy.Disclaimer />{" "}
+                  <CedraPrivacyPolicy.Disclaimer />{" "}
                   <Box
-                    component={AptosPrivacyPolicy.Link}
+                    component={CedraPrivacyPolicy.Link}
                     sx={{
                       color: grey[400],
                       textDecoration: "underline",
@@ -199,7 +199,7 @@ export default function WalletsModal({
                   <span>.</span>
                 </Typography>
                 <Box
-                  component={AptosPrivacyPolicy.PoweredBy}
+                  component={CedraPrivacyPolicy.PoweredBy}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -247,7 +247,7 @@ export default function WalletsModal({
               </>
             )}
           </Stack>
-        </AboutAptosConnect>
+        </AboutCedraConnect>
       </Stack>
     </Dialog>
   );
@@ -308,7 +308,7 @@ function WalletRow({ wallet, onConnect }: WalletRowProps) {
   );
 }
 
-function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
+function CedraConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   return (
     <WalletItem wallet={wallet} onConnect={onConnect} asChild>
       <WalletItem.ConnectButton asChild>
@@ -325,7 +325,7 @@ function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   );
 }
 
-function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
+function renderEducationScreen(screen: AboutCedraConnectEducationScreen) {
   return (
     <>
       <Box
@@ -340,7 +340,7 @@ function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
           <ArrowBack />
         </IconButton>
         <Typography variant="body1" component="h2" width="100%" align="center">
-          About Aptos Connect
+          About Cedra Connect
         </Typography>
       </Box>
 

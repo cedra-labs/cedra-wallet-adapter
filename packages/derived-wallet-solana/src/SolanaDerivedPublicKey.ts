@@ -1,10 +1,10 @@
 import {
   computeDerivableAuthenticationKey,
-  parseAptosSigningMessage,
-} from "@aptos-labs/derived-wallet-base";
+  parseCedraSigningMessage,
+} from "@cedra-labs/derived-wallet-base";
 import {
   AccountPublicKey,
-  AptosConfig,
+  CedraConfig,
   AuthenticationKey,
   Deserializer,
   Ed25519PublicKey,
@@ -14,12 +14,12 @@ import {
   Serializer,
   Signature,
   VerifySignatureArgs,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import { createSignInMessage as createSolanaSignInMessage } from "@solana/wallet-standard-util";
 import { PublicKey as SolanaPublicKey } from "@solana/web3.js";
 import {
-  createSiwsEnvelopeForAptosStructuredMessage,
-  createSiwsEnvelopeForAptosTransaction,
+  createSiwsEnvelopeForCedraStructuredMessage,
+  createSiwsEnvelopeForCedraTransaction,
 } from "./createSiwsEnvelope";
 
 export interface SolanaDerivedPublicKeyParams {
@@ -54,7 +54,7 @@ export class SolanaDerivedPublicKey extends AccountPublicKey {
   }
 
   verifySignature({ message, signature }: VerifySignatureArgs): boolean {
-    const parsedSigningMessage = parseAptosSigningMessage(message);
+    const parsedSigningMessage = parseCedraSigningMessage(message);
     if (!parsedSigningMessage || !(signature instanceof Ed25519Signature)) {
       return false;
     }
@@ -67,12 +67,12 @@ export class SolanaDerivedPublicKey extends AccountPublicKey {
     // Obtain SIWS envelope input for the signing message
     const siwsEnvelopeInput =
       parsedSigningMessage.type === "structuredMessage"
-        ? createSiwsEnvelopeForAptosStructuredMessage({
+        ? createSiwsEnvelopeForCedraStructuredMessage({
             ...parsedSigningMessage,
             ...commonInput,
             domain: this.domain,
           })
-        : createSiwsEnvelopeForAptosTransaction({
+        : createSiwsEnvelopeForCedraTransaction({
             ...parsedSigningMessage,
             ...commonInput,
             domain: this.domain,
@@ -98,7 +98,7 @@ export class SolanaDerivedPublicKey extends AccountPublicKey {
   }
 
   async verifySignatureAsync(args: {
-    aptosConfig: AptosConfig;
+    cedraConfig: CedraConfig;
     message: HexInput;
     signature: Signature;
   }): Promise<boolean> {

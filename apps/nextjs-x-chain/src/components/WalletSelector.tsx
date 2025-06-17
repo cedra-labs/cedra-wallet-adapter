@@ -1,20 +1,20 @@
 "use client";
 
 import {
-  APTOS_CONNECT_ACCOUNT_URL,
-  AboutAptosConnect,
-  AboutAptosConnectEducationScreen,
+  CEDRA_CONNECT_ACCOUNT_URL,
+  AboutCedraConnect,
+  AboutCedraConnectEducationScreen,
   AdapterNotDetectedWallet,
   AdapterWallet,
-  AptosPrivacyPolicy,
+  CedraPrivacyPolicy,
   WalletItem,
   WalletSortingOptions,
   groupAndSortWallets,
-  isAptosConnectWallet,
+  isCedraConnectWallet,
   isInstallRequired,
   truncateAddress,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -84,10 +84,10 @@ export function WalletSelector(walletSortingOptions: WalletSortingOptions) {
         <DropdownMenuItem onSelect={copyAddress} className="gap-2">
           <Copy className="h-4 w-4" /> Copy address
         </DropdownMenuItem>
-        {wallet && isAptosConnectWallet(wallet) && (
+        {wallet && isCedraConnectWallet(wallet) && (
           <DropdownMenuItem asChild>
             <a
-              href={APTOS_CONNECT_ACCOUNT_URL}
+              href={CEDRA_CONNECT_ACCOUNT_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex gap-2"
@@ -121,18 +121,18 @@ function ConnectWalletDialog({
 }: ConnectWalletDialogProps) {
   const { wallets = [], notDetectedWallets = [] } = useWallet();
 
-  const { aptosConnectWallets, availableWallets, installableWallets } =
+  const { cedraConnectWallets, availableWallets, installableWallets } =
     groupAndSortWallets(
       [...wallets, ...notDetectedWallets],
       walletSortingOptions
     );
 
-  const hasAptosConnectWallets = !!aptosConnectWallets.length;
+  const hasCedraConnectWallets = !!cedraConnectWallets.length;
 
-  const { evmWallets, solanaWallets, aptosWallets } = availableWallets.reduce<{
+  const { evmWallets, solanaWallets, cedraWallets } = availableWallets.reduce<{
     evmWallets: AdapterWallet[];
     solanaWallets: AdapterWallet[];
-    aptosWallets: AdapterWallet[];
+    cedraWallets: AdapterWallet[];
   }>(
     (acc, wallet) => {
       if (wallet.name.includes("Ethereum")) {
@@ -140,22 +140,22 @@ function ConnectWalletDialog({
       } else if (wallet.name.includes("Solana")) {
         acc.solanaWallets.push(wallet);
       } else {
-        acc.aptosWallets.push(wallet);
+        acc.cedraWallets.push(wallet);
       }
       return acc;
     },
-    { evmWallets: [], solanaWallets: [], aptosWallets: [] }
+    { evmWallets: [], solanaWallets: [], cedraWallets: [] }
   );
 
   return (
     <DialogContent className="max-h-screen overflow-auto">
-      <AboutAptosConnect renderEducationScreen={renderEducationScreen}>
+      <AboutCedraConnect renderEducationScreen={renderEducationScreen}>
         <DialogHeader>
           <DialogTitle className="flex flex-col text-center leading-snug">
-            {hasAptosConnectWallets ? (
+            {hasCedraConnectWallets ? (
               <>
                 <span>Log in or sign up</span>
-                <span>with Social + Aptos Connect</span>
+                <span>with Social + Cedra Connect</span>
               </>
             ) : (
               "Connect Wallet"
@@ -163,10 +163,10 @@ function ConnectWalletDialog({
           </DialogTitle>
         </DialogHeader>
 
-        {hasAptosConnectWallets && (
+        {hasCedraConnectWallets && (
           <div className="flex flex-col gap-2 pt-3">
-            {aptosConnectWallets.map((wallet) => (
-              <AptosConnectWalletRow
+            {cedraConnectWallets.map((wallet) => (
+              <CedraConnectWalletRow
                 key={wallet.name}
                 wallet={wallet}
                 onConnect={close}
@@ -174,18 +174,18 @@ function ConnectWalletDialog({
             ))}
             <p className="flex gap-1 justify-center items-center text-muted-foreground text-sm">
               Learn more about{" "}
-              <AboutAptosConnect.Trigger className="flex gap-1 py-3 items-center text-foreground">
-                Aptos Connect <ArrowRight size={16} />
-              </AboutAptosConnect.Trigger>
+              <AboutCedraConnect.Trigger className="flex gap-1 py-3 items-center text-foreground">
+                Cedra Connect <ArrowRight size={16} />
+              </AboutCedraConnect.Trigger>
             </p>
-            <AptosPrivacyPolicy className="flex flex-col items-center py-1">
+            <CedraPrivacyPolicy className="flex flex-col items-center py-1">
               <p className="text-xs leading-5">
-                <AptosPrivacyPolicy.Disclaimer />{" "}
-                <AptosPrivacyPolicy.Link className="text-muted-foreground underline underline-offset-4" />
+                <CedraPrivacyPolicy.Disclaimer />{" "}
+                <CedraPrivacyPolicy.Link className="text-muted-foreground underline underline-offset-4" />
                 <span className="text-muted-foreground">.</span>
               </p>
-              <AptosPrivacyPolicy.PoweredBy className="flex gap-1.5 items-center text-xs leading-5 text-muted-foreground" />
-            </AptosPrivacyPolicy>
+              <CedraPrivacyPolicy.PoweredBy className="flex gap-1.5 items-center text-xs leading-5 text-muted-foreground" />
+            </CedraPrivacyPolicy>
             <div className="flex items-center gap-3 pt-4 text-muted-foreground">
               <div className="h-px w-full bg-secondary" />
               Or
@@ -195,15 +195,15 @@ function ConnectWalletDialog({
         )}
 
         <div className="flex flex-col gap-3 pt-3">
-          {/* Handle Aptos wallets */}
-          <Tabs defaultValue="aptos">
+          {/* Handle Cedra wallets */}
+          <Tabs defaultValue="cedra">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="aptos">Aptos</TabsTrigger>
+              <TabsTrigger value="cedra">Cedra</TabsTrigger>
               <TabsTrigger value="solana">Solana</TabsTrigger>
               <TabsTrigger value="ethereum">Ethereum</TabsTrigger>
             </TabsList>
-            <TabsContent value="aptos">
-              {aptosWallets.map((wallet) => (
+            <TabsContent value="cedra">
+              {cedraWallets.map((wallet) => (
                 <WalletRow
                   key={wallet.name}
                   wallet={wallet}
@@ -251,7 +251,7 @@ function ConnectWalletDialog({
             </TabsContent>
           </Tabs>
         </div>
-      </AboutAptosConnect>
+      </AboutCedraConnect>
     </DialogContent>
   );
 }
@@ -285,7 +285,7 @@ function WalletRow({ wallet, onConnect }: WalletRowProps) {
   );
 }
 
-function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
+function CedraConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   return (
     <WalletItem wallet={wallet} onConnect={onConnect}>
       <WalletItem.ConnectButton asChild>
@@ -298,7 +298,7 @@ function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   );
 }
 
-function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
+function renderEducationScreen(screen: AboutCedraConnectEducationScreen) {
   return (
     <>
       <DialogHeader className="grid grid-cols-[1fr_4fr_1fr] items-center space-y-0">
@@ -306,7 +306,7 @@ function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
           <ArrowLeft />
         </Button>
         <DialogTitle className="leading-snug text-base text-center">
-          About Aptos Connect
+          About Cedra Connect
         </DialogTitle>
       </DialogHeader>
 

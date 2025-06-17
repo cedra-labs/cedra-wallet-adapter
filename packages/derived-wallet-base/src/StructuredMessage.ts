@@ -1,6 +1,6 @@
-import { AccountAddressInput } from "@aptos-labs/ts-sdk";
+import { AccountAddressInput } from "@cedra-labs/ts-sdk";
 
-export const structuredMessagePrefix = "APTOS" as const;
+export const structuredMessagePrefix = "CEDRA" as const;
 
 export interface StructuredMessageInput {
   message: string;

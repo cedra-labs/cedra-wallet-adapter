@@ -4,19 +4,19 @@ import {
   AccountInfo,
   AdapterWallet,
   AnyRawTransaction,
-  AptosSignAndSubmitTransactionOutput,
+  CedraSignAndSubmitTransactionOutput,
   InputTransactionData,
   NetworkInfo,
-  AptosSignMessageInput,
-  AptosSignMessageOutput,
+  CedraSignMessageInput,
+  CedraSignMessageOutput,
   AdapterNotDetectedWallet,
   Network,
-  AptosChangeNetworkOutput,
+  CedraChangeNetworkOutput,
   PendingTransactionResponse,
   InputSubmitTransactionData,
-  AptosSignInInput,
-  AptosSignInOutput,
-} from "@aptos-labs/wallet-adapter-core";
+  CedraSignInInput,
+  CedraSignInOutput,
+} from "@cedra-labs/wallet-adapter-core";
 import { OriginWalletDetails } from "./WalletProvider";
 
 export interface WalletContextState {
@@ -27,11 +27,11 @@ export interface WalletContextState {
   connect(walletName: string): void;
   signIn(args: {
     walletName: string;
-    input: AptosSignInInput;
-  }): Promise<AptosSignInOutput | void>;
+    input: CedraSignInInput;
+  }): Promise<CedraSignInOutput | void>;
   signAndSubmitTransaction(
     transaction: InputTransactionData,
-  ): Promise<AptosSignAndSubmitTransactionOutput>;
+  ): Promise<CedraSignAndSubmitTransactionOutput>;
   signTransaction(args: {
     transactionOrPayload: AnyRawTransaction | InputTransactionData;
     asFeePayer?: boolean;
@@ -39,10 +39,10 @@ export interface WalletContextState {
     authenticator: AccountAuthenticator;
     rawTransaction: Uint8Array;
   }>;
-  signMessage(message: AptosSignMessageInput): Promise<AptosSignMessageOutput>;
-  signMessageAndVerify(message: AptosSignMessageInput): Promise<boolean>;
+  signMessage(message: CedraSignMessageInput): Promise<CedraSignMessageOutput>;
+  signMessageAndVerify(message: CedraSignMessageInput): Promise<boolean>;
   disconnect(): void;
-  changeNetwork(network: Network): Promise<AptosChangeNetworkOutput>;
+  changeNetwork(network: Network): Promise<CedraChangeNetworkOutput>;
   submitTransaction(
     transaction: InputSubmitTransactionData,
   ): Promise<PendingTransactionResponse>;

@@ -1,7 +1,7 @@
 {
-  "name": "@aptos-labs/wallet-adapter-core",
+  "name": "@cedra-labs/wallet-adapter-core",
   "version": "5.5.1",
-  "description": "Aptos Wallet Adapter Core",
+  "description": "Cedra Wallet Adapter Core",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,19 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter.git"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-wallet-adapter",
+  "homepage": "https://github.com/cedra-labs/cedra-wallet-adapter",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter/issues"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "cedralabs.com",
   "keywords": [
-    "Aptos",
-    "Aptos Labs",
+    "Cedra",
+    "Cedra Labs",
     "Wallet",
     "Wallet Adapter",
-    "Aptos Wallet"
+    "Cedra Wallet"
   ],
   "scripts": {
     "update-version": "node -p \"'export const WALLET_ADAPTER_CORE_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
@@ -39,8 +39,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@aptos-labs/eslint-config-adapter": "workspace:*",
-    "@aptos-labs/wallet-adapter-tsconfig": "workspace:*",
+    "@cedra-labs/eslint-config-adapter": "workspace:*",
+    "@cedra-labs/wallet-adapter-tsconfig": "workspace:*",
     "@swc/core": "^1.11.16",
     "@types/jest": "^29.2.4",
     "@types/node": "^20.10.4",
@@ -51,16 +51,16 @@
     "typescript": "^4.5.3"
   },
   "dependencies": {
-    "@aptos-connect/wallet-adapter-plugin": "2.4.1",
-    "@aptos-labs/wallet-standard": "^0.4.0",
-    "@atomrigslab/aptos-wallet-adapter": "^0.1.20",
-    "@msafe/aptos-aip62-wallet": "^1.0.18",
+    "@cedra-connect/wallet-adapter-plugin": "2.4.1",
+    "@cedra-labs/wallet-standard": "^0.4.0",
+    "@atomrigslab/cedra-wallet-adapter": "^0.1.20",
+    "@msafe/cedra-aip62-wallet": "^1.0.18",
     "buffer": "^6.0.3",
     "eventemitter3": "^4.0.7",
     "tweetnacl": "^1.0.3"
   },
   "peerDependencies": {
-    "@aptos-labs/ts-sdk": "^1.38.0 || ^2.0.0"
+    "@cedra-labs/ts-sdk": "^1.38.0 || ^2.0.0"
   },
   "files": [
     "dist",

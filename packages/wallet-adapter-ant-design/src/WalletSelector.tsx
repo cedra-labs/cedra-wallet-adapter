@@ -1,17 +1,17 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import {
-  AboutAptosConnect,
-  AboutAptosConnectEducationScreen,
+  AboutCedraConnect,
+  AboutCedraConnectEducationScreen,
   AdapterNotDetectedWallet,
   AdapterWallet,
-  AptosPrivacyPolicy,
+  CedraPrivacyPolicy,
   WalletItem,
   WalletSortingOptions,
   groupAndSortWallets,
   isInstallRequired,
   truncateAddress,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 import {
   Button,
   Collapse,
@@ -54,13 +54,13 @@ export function WalletSelector({
     notDetectedWallets = [],
   } = useWallet();
 
-  const { aptosConnectWallets, availableWallets, installableWallets } =
+  const { cedraConnectWallets, availableWallets, installableWallets } =
     groupAndSortWallets(
       [...wallets, ...notDetectedWallets],
       walletSortingOptions,
     );
 
-  const hasAptosConnectWallets = !!aptosConnectWallets.length;
+  const hasCedraConnectWallets = !!cedraConnectWallets.length;
 
   const onWalletButtonClick = () => {
     if (connected) {
@@ -91,29 +91,29 @@ export function WalletSelector({
     className: "wallet-selector-modal",
   };
 
-  const renderEducationScreens = (screen: AboutAptosConnectEducationScreen) => (
+  const renderEducationScreens = (screen: AboutCedraConnectEducationScreen) => (
     <Modal
       {...modalProps}
       afterClose={screen.cancel}
       title={
-        <div className="about-aptos-connect-header">
+        <div className="about-cedra-connect-header">
           <Button
             type="text"
             icon={<ArrowLeftOutlined />}
             onClick={screen.cancel}
           />
-          <div className="wallet-modal-title">About Aptos Connect</div>
+          <div className="wallet-modal-title">About Cedra Connect</div>
         </div>
       }
     >
-      <div className="about-aptos-connect-graphic-wrapper">
+      <div className="about-cedra-connect-graphic-wrapper">
         <screen.Graphic />
       </div>
-      <div className="about-aptos-connect-text-wrapper">
-        <screen.Title className="about-aptos-connect-title" />
-        <screen.Description className="about-aptos-connect-description" />
+      <div className="about-cedra-connect-text-wrapper">
+        <screen.Title className="about-cedra-connect-title" />
+        <screen.Description className="about-cedra-connect-description" />
       </div>
-      <div className="about-aptos-connect-footer-wrapper">
+      <div className="about-cedra-connect-footer-wrapper">
         <Button
           type="text"
           style={{ justifySelf: "start" }}
@@ -121,11 +121,11 @@ export function WalletSelector({
         >
           Back
         </Button>
-        <div className="about-aptos-connect-screen-indicators-wrapper">
+        <div className="about-cedra-connect-screen-indicators-wrapper">
           {screen.screenIndicators.map((ScreenIndicator, i) => (
             <ScreenIndicator
               key={i}
-              className="about-aptos-connect-screen-indicator"
+              className="about-cedra-connect-screen-indicator"
             >
               <div />
             </ScreenIndicator>
@@ -149,15 +149,15 @@ export function WalletSelector({
       <Button className="wallet-button" onClick={onWalletButtonClick}>
         {connected ? buttonText : "Connect Wallet"}
       </Button>
-      <AboutAptosConnect renderEducationScreen={renderEducationScreens}>
+      <AboutCedraConnect renderEducationScreen={renderEducationScreens}>
         <Modal
           {...modalProps}
           title={
             <div className="wallet-modal-title">
-              {hasAptosConnectWallets ? (
+              {hasCedraConnectWallets ? (
                 <>
                   <span>Log in or sign up</span>
-                  <span>with Social + Aptos Connect</span>
+                  <span>with Social + Cedra Connect</span>
                 </>
               ) : (
                 "Connect Wallet"
@@ -167,30 +167,30 @@ export function WalletSelector({
         >
           {!connected && (
             <>
-              {hasAptosConnectWallets && (
+              {hasCedraConnectWallets && (
                 <Flex vertical gap={12}>
-                  {aptosConnectWallets.map((wallet) => (
-                    <AptosConnectWalletRow
+                  {cedraConnectWallets.map((wallet) => (
+                    <CedraConnectWalletRow
                       key={wallet.name}
                       wallet={wallet}
                       onConnect={closeModal}
                     />
                   ))}
-                  <p className="about-aptos-connect-trigger-wrapper">
+                  <p className="about-cedra-connect-trigger-wrapper">
                     Learn more about{" "}
-                    <AboutAptosConnect.Trigger className="about-aptos-connect-trigger">
-                      Aptos Connect
+                    <AboutCedraConnect.Trigger className="about-cedra-connect-trigger">
+                      Cedra Connect
                       <ArrowRightOutlined />
-                    </AboutAptosConnect.Trigger>
+                    </AboutCedraConnect.Trigger>
                   </p>
-                  <AptosPrivacyPolicy className="aptos-connect-privacy-policy-wrapper">
-                    <p className="aptos-connect-privacy-policy-text">
-                      <AptosPrivacyPolicy.Disclaimer />{" "}
-                      <AptosPrivacyPolicy.Link className="aptos-connect-privacy-policy-link" />
+                  <CedraPrivacyPolicy className="cedra-connect-privacy-policy-wrapper">
+                    <p className="cedra-connect-privacy-policy-text">
+                      <CedraPrivacyPolicy.Disclaimer />{" "}
+                      <CedraPrivacyPolicy.Link className="cedra-connect-privacy-policy-link" />
                       <span>.</span>
                     </p>
-                    <AptosPrivacyPolicy.PoweredBy className="aptos-connect-powered-by" />
-                  </AptosPrivacyPolicy>
+                    <CedraPrivacyPolicy.PoweredBy className="cedra-connect-powered-by" />
+                  </CedraPrivacyPolicy>
                   <Divider>Or</Divider>
                 </Flex>
               )}
@@ -229,7 +229,7 @@ export function WalletSelector({
             </>
           )}
         </Modal>
-      </AboutAptosConnect>
+      </AboutCedraConnect>
     </>
   );
 }
@@ -261,11 +261,11 @@ function WalletRow({ wallet, onConnect }: WalletRowProps) {
   );
 }
 
-function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
+function CedraConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   return (
     <WalletItem wallet={wallet} onConnect={onConnect} asChild>
       <WalletItem.ConnectButton asChild>
-        <Button size="large" className="aptos-connect-button">
+        <Button size="large" className="cedra-connect-button">
           <WalletItem.Icon className="wallet-selector-icon" />
           <WalletItem.Name />
         </Button>

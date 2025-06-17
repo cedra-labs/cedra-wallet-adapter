@@ -48,17 +48,17 @@ export const mainnetChains: ChainsConfig = {
   // },
 };
 
-export const AptosMainnetChain = {
-  key: "Aptos",
+export const CedraMainnetChain = {
+  key: "Cedra",
   id: 22,
-  context: "Aptos",
+  context: "Cedra",
   finalityThreshold: 0,
-  displayName: "Aptos",
-  explorerUrl: "https://explorer.aptoslabs.com/",
-  explorerName: "Aptos Explorer",
+  displayName: "Cedra",
+  explorerUrl: "https://explorer.cedralabs.com/",
+  explorerName: "Cedra Explorer",
   gasToken: "APT",
   chainId: 0,
-  icon: "Aptos",
+  icon: "Cedra",
   maxBlockSearch: 0,
   symbol: "APT",
 };

@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAptBalanceQueryOptions } from "@/utils/getAptBalanceQueryOptions";
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import { Cedra, CedraConfig, Network } from "@cedra-labs/ts-sdk";
 import {
   AccountInfo,
   AdapterWallet,
   NetworkInfo,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
@@ -27,8 +27,8 @@ export function AccountBalance({ account, network }: AccountBalanceProps) {
 
   const { mutateAsync: fundAccount, isPending: isFunding } = useMutation({
     mutationFn: async () => {
-      const aptos = new Aptos(new AptosConfig({ network: network.name }));
-      await aptos.fundAccount({
+      const cedra = new Cedra(new CedraConfig({ network: network.name }));
+      await cedra.fundAccount({
         accountAddress: account.address,
         amount: 0.1e8,
       });

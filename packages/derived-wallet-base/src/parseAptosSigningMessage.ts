@@ -12,7 +12,7 @@ import {
   RawTransaction,
   RawTransactionWithData,
   SimpleTransaction,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import {
   decodeStructuredMessage,
   StructuredMessage,
@@ -58,7 +58,7 @@ export type ParseSigningMessageResult =
   | ParseSigningMessageTransactionResult
   | ParseSigningMessageStructuredMessageResult;
 
-export function parseAptosSigningMessage(
+export function parseCedraSigningMessage(
   message: HexInput,
 ): ParseSigningMessageResult | undefined {
   const messageBytes = Hex.fromHexInput(message).toUint8Array();

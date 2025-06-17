@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {
   AdapterWallet,
-  APTOS_CONNECT_ACCOUNT_URL,
-  isAptosConnectWallet,
+  CEDRA_CONNECT_ACCOUNT_URL,
+  isCedraConnectWallet,
   truncateAddress,
-} from "@aptos-labs/wallet-adapter-vue";
+} from "@cedra-labs/wallet-adapter-vue";
 import { Copy, LogOut, User } from "lucide-vue-next";
 import { DialogRoot as Dialog, DialogTrigger } from "radix-vue";
 
@@ -65,10 +65,10 @@ async function connectWallet(wallet: AdapterWallet) {
         <DropdownMenuItem @click="copyAddress" class="gap-2">
           <Copy class="h-4 w-4" /> Copy Address
         </DropdownMenuItem>
-        <template v-if="wallet && isAptosConnectWallet(wallet)">
+        <template v-if="wallet && isCedraConnectWallet(wallet)">
           <DropdownMenuItem as-child>
             <a
-              :href="APTOS_CONNECT_ACCOUNT_URL"
+              :href="CEDRA_CONNECT_ACCOUNT_URL"
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2"

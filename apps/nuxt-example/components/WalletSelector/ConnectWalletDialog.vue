@@ -3,10 +3,10 @@ import { Ref, toRefs, watch, unref } from "vue";
 import {
   AdapterWallet,
   AdapterNotDetectedWallet,
-  getAptosConnectWallets,
+  getCedraConnectWallets,
   partitionWallets,
-  AptosPrivacyPolicy,
-} from "@aptos-labs/wallet-adapter-vue";
+  CedraPrivacyPolicy,
+} from "@cedra-labs/wallet-adapter-vue";
 
 import { ChevronDown } from "lucide-vue-next";
 import {
@@ -23,7 +23,7 @@ const props = defineProps<Props>();
 const { wallets } = toRefs(props);
 const emit = defineEmits(["close", "connect"]);
 const walletsForConnect = ref({
-  aptosConnectWallets: [] as AdapterWallet[],
+  cedraConnectWallets: [] as AdapterWallet[],
   defaultWallets: [] as AdapterWallet[],
   moreWallets: [] as AdapterNotDetectedWallet[],
 });
@@ -31,14 +31,14 @@ const walletsForConnect = ref({
 watch(
   wallets,
   () => {
-    const { aptosConnectWallets, otherWallets } = getAptosConnectWallets(
+    const { cedraConnectWallets, otherWallets } = getCedraConnectWallets(
       wallets.value
     );
 
     const { defaultWallets, moreWallets } = partitionWallets(otherWallets);
 
     walletsForConnect.value = {
-      aptosConnectWallets: unref(aptosConnectWallets),
+      cedraConnectWallets: unref(cedraConnectWallets),
       defaultWallets: unref(defaultWallets),
       moreWallets: unref(moreWallets),
     };
@@ -59,20 +59,20 @@ function close() {
     <DialogHeader class="flex flex-col items-center">
       <DialogTitle class="flex flex-col text-center leading-snug">
         <span>Log in or sign up</span>
-        <span>with Social + Aptos Connect</span>
+        <span>with Social + Cedra Connect</span>
       </DialogTitle>
     </DialogHeader>
     <div class="flex flex-col gap-3 pt-3">
-      <template v-for="wallet in walletsForConnect.aptosConnectWallets">
-        <AptosConnectWalletRow
+      <template v-for="wallet in walletsForConnect.cedraConnectWallets">
+        <CedraConnectWalletRow
           :wallet="wallet"
           @connect="$emit('connect', $event)"
           :onConnect="close"
         />
       </template>
     </div>
-    <AptosPrivacyPolicy class="flex flex-col items-center">
-    </AptosPrivacyPolicy>
+    <CedraPrivacyPolicy class="flex flex-col items-center">
+    </CedraPrivacyPolicy>
     <div class="flex items-center gap-3 pt-4 text-muted-foreground">
       <div class="h-px w-full bg-secondary" />
       Or

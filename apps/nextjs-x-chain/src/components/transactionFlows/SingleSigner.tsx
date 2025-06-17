@@ -5,13 +5,13 @@ import {
   Ed25519PrivateKey,
   PrivateKey,
   PrivateKeyVariants,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import {
   InputTransactionData,
   useWallet,
-} from "@aptos-labs/wallet-adapter-react";
+} from "@cedra-labs/wallet-adapter-react";
 
-import { isSendableNetwork, aptosClient } from "@/utils";
+import { isSendableNetwork, cedraClient } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
@@ -42,7 +42,7 @@ export function SingleSigner() {
     if (!account) return;
     try {
       const payload = {
-        message: "Hello from Aptos Wallet Adapter",
+        message: "Hello from Cedra Wallet Adapter",
         nonce: generateNonce(),
       };
       const response = await signMessageAndVerify(payload);
@@ -64,7 +64,7 @@ export function SingleSigner() {
     if (!account) return;
     try {
       const payload = {
-        message: "Hello from Aptos Wallet Adapter",
+        message: "Hello from Cedra Wallet Adapter",
         nonce: generateNonce(),
       };
       const response = await signMessage(payload);
@@ -87,7 +87,7 @@ export function SingleSigner() {
       if (!account) return;
       const payload: InputTransactionData = {
         data: {
-          function: "0x1::aptos_account::transfer",
+          function: "0x1::cedra_account::transfer",
           functionArguments: [account.address.toString(), 1],
         },
         withFeePayer: true,
@@ -126,11 +126,11 @@ export function SingleSigner() {
       const sponsorPrivateKeyHex =
         process.env.NEXT_PUBLIC_SWAP_CCTP_SPONSOR_ACCOUNT_PRIVATE_KEY;
 
-      const rawTransaction = await aptosClient(
+      const rawTransaction = await cedraClient(
         network,
       ).transaction.build.simple({
         data: {
-          function: "0x1::aptos_account::transfer",
+          function: "0x1::cedra_account::transfer",
           functionArguments: [account.address.toString(), 717],
         },
         options: {
@@ -155,13 +155,13 @@ export function SingleSigner() {
         const sponsor = Account.fromPrivateKey({
           privateKey: sponsorPrivateKey,
         });
-        sponsorAuthenticator = aptosClient(network).transaction.signAsFeePayer({
+        sponsorAuthenticator = cedraClient(network).transaction.signAsFeePayer({
           signer: sponsor,
           transaction: rawTransaction,
         });
       }
 
-      const txnSubmitted = await aptosClient(network).transaction.submit.simple(
+      const txnSubmitted = await cedraClient(network).transaction.submit.simple(
         {
           transaction: rawTransaction,
           senderAuthenticator: response.authenticator,
@@ -169,7 +169,7 @@ export function SingleSigner() {
         },
       );
 
-      await aptosClient(network).waitForTransaction({
+      await cedraClient(network).waitForTransaction({
         transactionHash: txnSubmitted.hash,
       });
 

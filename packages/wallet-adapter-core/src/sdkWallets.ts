@@ -1,34 +1,34 @@
 import {
-  AptosConnectAppleWallet,
-  AptosConnectGoogleWallet,
-} from "@aptos-connect/wallet-adapter-plugin";
-import { Network } from "@aptos-labs/ts-sdk";
-import { DevTWallet, TWallet } from "@atomrigslab/aptos-wallet-adapter";
-import { MSafeWallet } from "@msafe/aptos-aip62-wallet";
+  CedraConnectAppleWallet,
+  CedraConnectGoogleWallet,
+} from "@cedra-connect/wallet-adapter-plugin";
+import { Network } from "@cedra-labs/ts-sdk";
+import { DevTWallet, TWallet } from "@atomrigslab/cedra-wallet-adapter";
+import { MSafeWallet } from "@msafe/cedra-aip62-wallet";
 import { DappConfig, AdapterWallet } from "./WalletCore";
 
 export function getSDKWallets(dappConfig?: DappConfig) {
   const sdkWallets: AdapterWallet[] = [];
 
-  // Need to check window is defined for AptosConnect
+  // Need to check window is defined for CedraConnect
   if (typeof window !== "undefined") {
     sdkWallets.push(
-      new AptosConnectGoogleWallet({
+      new CedraConnectGoogleWallet({
         network: dappConfig?.network,
-        dappId: dappConfig?.aptosConnectDappId,
-        ...dappConfig?.aptosConnect,
+        dappId: dappConfig?.cedraConnectDappId,
+        ...dappConfig?.cedraConnect,
       }),
-      new AptosConnectAppleWallet({
+      new CedraConnectAppleWallet({
         network: dappConfig?.network,
-        dappId: dappConfig?.aptosConnectDappId,
-        ...dappConfig?.aptosConnect,
+        dappId: dappConfig?.cedraConnectDappId,
+        ...dappConfig?.cedraConnect,
       })
     );
   }
 
   // Push production wallet if env is production, otherwise use dev wallet
   if (dappConfig?.network === Network.MAINNET) {
-    // TODO twallet uses @aptos-labs/wallet-standard at version 0.0.11 while adapter uses
+    // TODO twallet uses @cedra-labs/wallet-standard at version 0.0.11 while adapter uses
     // a newer version (0.1.0) - this causes type mismatch. We should figure out how to handle it.
     sdkWallets.push(new TWallet() as any);
   } else {

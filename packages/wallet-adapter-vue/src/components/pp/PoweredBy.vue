@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AptosLogo from "../icons/AptosLogo.vue";
+import CedraLogo from "../icons/CedraLogo.vue";
 </script>
 
 <template>
   <div v-bind="$attrs">
     <span>Powered by</span>
-    <AptosLogo />
-    <span>Aptos Labs</span>
+    <CedraLogo />
+    <span>Cedra Labs</span>
   </div>
 </template>

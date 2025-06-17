@@ -3,9 +3,9 @@ import {
   AccountInfo,
   NetworkInfo,
   WalletInfo,
-  isAptosNetwork,
-} from "@aptos-labs/wallet-adapter-vue";
-import { Network } from "@aptos-labs/ts-sdk";
+  isCedraNetwork,
+} from "@cedra-labs/wallet-adapter-vue";
+import { Network } from "@cedra-labs/ts-sdk";
 
 const WalletIcon = defineAsyncComponent(
   () => import("~/components/ui/Wallet/WalletIcon.vue"),
@@ -29,12 +29,12 @@ defineEmits(["changeNetwork"]);
 const { account, network, wallet } = toRefs(props);
 
 const isValidNetworkName = computed(() => {
-  if (isAptosNetwork(network.value)) {
+  if (isCedraNetwork(network.value)) {
     return Object.values<string | undefined>(Network).includes(
       network.value?.name,
     );
   }
-  // If the configured network is not an Aptos network, i.e is a custom network
+  // If the configured network is not an Cedra network, i.e is a custom network
   // we resolve it as a valid network name
   return true;
 });

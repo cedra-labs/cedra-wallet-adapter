@@ -52,18 +52,18 @@ export const testnetChains: ChainsConfig = {
   // },
 };
 
-export const AptosTestnetChain = {
-  key: "Aptos",
+export const CedraTestnetChain = {
+  key: "Cedra",
   id: 22,
-  context: Context.APTOS,
+  context: Context.CEDRA,
   finalityThreshold: 0,
-  displayName: "Aptos",
-  explorerUrl: "https://explorer.aptoslabs.com?network=testnet",
-  explorerName: "Aptos Explorer",
+  displayName: "Cedra",
+  explorerUrl: "https://explorer.cedralabs.com?network=testnet",
+  explorerName: "Cedra Explorer",
   gasToken: "APT",
   chainId: 0,
-  icon: "Aptos",
+  icon: "Cedra",
   maxBlockSearch: 0,
   symbol: "APT",
-  sdkName: "Aptos",
+  sdkName: "Cedra",
 };

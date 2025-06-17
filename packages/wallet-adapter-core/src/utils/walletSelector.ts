@@ -1,6 +1,6 @@
 import { WalletInfo } from "./types";
 import { AdapterNotDetectedWallet, AdapterWallet } from "../WalletCore";
-import { APTOS_CONNECT_BASE_URL, WalletReadyState } from "../constants";
+import { CEDRA_CONNECT_BASE_URL, WalletReadyState } from "../constants";
 import { isRedirectable } from "./helpers";
 
 /**
@@ -51,29 +51,29 @@ export function truncateAddress(address: string | undefined) {
   return `${address.slice(0, 6)}...${address.slice(-5)}`;
 }
 
-/** Returns `true` if the provided wallet is an Aptos Connect wallet. */
-export function isAptosConnectWallet(wallet: WalletInfo | AdapterWallet) {
+/** Returns `true` if the provided wallet is an Cedra Connect wallet. */
+export function isCedraConnectWallet(wallet: WalletInfo | AdapterWallet) {
   if (!wallet.url) return false;
-  return wallet.url.startsWith(APTOS_CONNECT_BASE_URL);
+  return wallet.url.startsWith(CEDRA_CONNECT_BASE_URL);
 }
 
 /**
- * Partitions the `wallets` array so that Aptos Connect wallets are grouped separately from the rest.
- * Aptos Connect is a web wallet that uses social login to create accounts on the blockchain.
+ * Partitions the `wallets` array so that Cedra Connect wallets are grouped separately from the rest.
+ * Cedra Connect is a web wallet that uses social login to create accounts on the blockchain.
  */
-export function getAptosConnectWallets(
+export function getCedraConnectWallets(
   wallets: ReadonlyArray<AdapterWallet | AdapterNotDetectedWallet>,
 ) {
   const { defaultWallets, moreWallets } = partitionWallets(
     wallets,
-    isAptosConnectWallet,
+    isCedraConnectWallet,
   );
-  return { aptosConnectWallets: defaultWallets, otherWallets: moreWallets };
+  return { cedraConnectWallets: defaultWallets, otherWallets: moreWallets };
 }
 
 export interface WalletSortingOptions {
-  /** An optional function for sorting Aptos Connect wallets. */
-  sortAptosConnectWallets?: (a: AdapterWallet, b: AdapterWallet) => number;
+  /** An optional function for sorting Cedra Connect wallets. */
+  sortCedraConnectWallets?: (a: AdapterWallet, b: AdapterWallet) => number;
   /** An optional function for sorting wallets that are currently installed or loadable. */
   sortAvailableWallets?: (
     a: AdapterWallet | AdapterNotDetectedWallet,
@@ -89,8 +89,8 @@ export interface WalletSortingOptions {
 /**
  * Partitions the `wallets` array into three distinct groups:
  *
- * `aptosConnectWallets` - Wallets that use social login to create accounts on
- * the blockchain via Aptos Connect.
+ * `cedraConnectWallets` - Wallets that use social login to create accounts on
+ * the blockchain via Cedra Connect.
  *
  * `availableWallets` - Wallets that are currently installed or loadable by the client.
  *
@@ -103,11 +103,11 @@ export function groupAndSortWallets(
   wallets: ReadonlyArray<AdapterWallet | AdapterNotDetectedWallet>,
   options?: WalletSortingOptions,
 ) {
-  const { aptosConnectWallets, otherWallets } = getAptosConnectWallets(wallets);
+  const { cedraConnectWallets, otherWallets } = getCedraConnectWallets(wallets);
   const { defaultWallets, moreWallets } = partitionWallets(otherWallets);
 
-  if (options?.sortAptosConnectWallets) {
-    aptosConnectWallets.sort(options.sortAptosConnectWallets);
+  if (options?.sortCedraConnectWallets) {
+    cedraConnectWallets.sort(options.sortCedraConnectWallets);
   }
   if (options?.sortAvailableWallets) {
     defaultWallets.sort(options.sortAvailableWallets);
@@ -118,7 +118,7 @@ export function groupAndSortWallets(
 
   return {
     /** Wallets that use social login to create an account on the blockchain */
-    aptosConnectWallets,
+    cedraConnectWallets,
     /** Wallets that are currently installed or loadable. */
     availableWallets: defaultWallets,
     /** Wallets that are NOT currently installed or loadable. */

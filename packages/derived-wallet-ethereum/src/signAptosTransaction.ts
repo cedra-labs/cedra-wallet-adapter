@@ -1,7 +1,7 @@
 import {
   DerivableAbstractPublicKey,
   mapUserResponse,
-} from "@aptos-labs/derived-wallet-base";
+} from "@cedra-labs/derived-wallet-base";
 import {
   AccountAuthenticator,
   AccountAuthenticatorAbstraction,
@@ -9,10 +9,10 @@ import {
   generateSigningMessageForTransaction,
   hashValues,
   Serializer,
-} from "@aptos-labs/ts-sdk";
-import { UserResponse } from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/ts-sdk";
+import { UserResponse } from "@cedra-labs/wallet-standard";
 import { BrowserProvider, Eip1193Provider } from "ethers";
-import { createSiweEnvelopeForAptosTransaction } from "./createSiweEnvelope";
+import { createSiweEnvelopeForCedraTransaction } from "./createSiweEnvelope";
 import { EIP1193DerivedSignature } from "./EIP1193DerivedSignature";
 import { EthereumAddress, wrapEthersUserResponse } from "./shared";
 
@@ -22,15 +22,15 @@ import { EthereumAddress, wrapEthersUserResponse } from "./shared";
  * changes in the future if needed.
  */
 export const SIGNATURE_TYPE = 1;
-export interface SignAptosTransactionWithEthereumInput {
+export interface SignCedraTransactionWithEthereumInput {
   eip1193Provider: Eip1193Provider | BrowserProvider;
   ethereumAddress?: EthereumAddress;
   authenticationFunction: string;
   rawTransaction: AnyRawTransaction;
 }
 
-export async function signAptosTransactionWithEthereum(
-  input: SignAptosTransactionWithEthereumInput
+export async function signCedraTransactionWithEthereum(
+  input: SignCedraTransactionWithEthereumInput
 ): Promise<UserResponse<AccountAuthenticator>> {
   const { authenticationFunction, rawTransaction } = input;
   const eip1193Provider =
@@ -55,7 +55,7 @@ export async function signAptosTransactionWithEthereum(
   // We need to provide `issuedAt` externally so that we can match it with the signature
   const issuedAt = new Date();
 
-  const siweMessage = createSiweEnvelopeForAptosTransaction({
+  const siweMessage = createSiweEnvelopeForCedraTransaction({
     ethereumAddress,
     chainId,
     rawTransaction,

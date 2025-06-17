@@ -2,7 +2,7 @@ import { createSignInMessage } from "@solana/wallet-standard-util";
 import {
   mapUserResponse,
   DerivableAbstractPublicKey,
-} from "@aptos-labs/derived-wallet-base";
+} from "@cedra-labs/derived-wallet-base";
 import {
   AccountAuthenticator,
   AccountAuthenticatorAbstraction,
@@ -11,10 +11,10 @@ import {
   generateSigningMessageForTransaction,
   hashValues,
   Serializer,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import { PublicKey as SolanaPublicKey } from "@solana/web3.js";
 import { StandardWalletAdapter as SolanaWalletAdapter } from "@solana/wallet-standard-wallet-adapter-base";
-import { createSiwsEnvelopeForAptosTransaction } from "./createSiwsEnvelope";
+import { createSiwsEnvelopeForCedraTransaction } from "./createSiwsEnvelope";
 import { wrapSolanaUserResponse } from "./shared";
 
 /**
@@ -23,15 +23,15 @@ import { wrapSolanaUserResponse } from "./shared";
  * changes in the future if needed.
  */
 export const SIGNATURE_TYPE = 0;
-export interface SignAptosTransactionWithSolanaInput {
+export interface SignCedraTransactionWithSolanaInput {
   solanaWallet: SolanaWalletAdapter;
   authenticationFunction: string;
   rawTransaction: AnyRawTransaction;
   domain: string;
 }
 
-export async function signAptosTransactionWithSolana(
-  input: SignAptosTransactionWithSolanaInput,
+export async function signCedraTransactionWithSolana(
+  input: SignCedraTransactionWithSolanaInput,
 ) {
   const { solanaWallet, authenticationFunction, rawTransaction, domain } =
     input;
@@ -44,7 +44,7 @@ export async function signAptosTransactionWithSolana(
   const signingMessage = generateSigningMessageForTransaction(rawTransaction);
   const signingMessageDigest = hashValues([signingMessage]);
 
-  const siwsInput = createSiwsEnvelopeForAptosTransaction({
+  const siwsInput = createSiwsEnvelopeForCedraTransaction({
     solanaPublicKey,
     rawTransaction,
     signingMessageDigest,

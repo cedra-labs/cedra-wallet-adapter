@@ -3,6 +3,6 @@
     <slot name="disclaimer" />
   </template>
   <template v-else>
-    <span v-bind="$attrs"> By continuing, you agree to Aptos Labs' </span>
+    <span v-bind="$attrs"> By continuing, you agree to Cedra Labs' </span>
   </template>
 </template>

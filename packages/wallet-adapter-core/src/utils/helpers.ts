@@ -1,14 +1,14 @@
 import {
-  Aptos,
-  AptosConfig,
+  Cedra,
+  CedraConfig,
   Hex,
   Network,
   NetworkToNodeAPI,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import {
   NetworkInfo,
   NetworkInfo as StandardNetworkInfo,
-} from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/wallet-standard";
 
 import { DappConfig } from "../WalletCore";
 import { WalletSignAndSubmitMessageError } from "../error";
@@ -48,38 +48,38 @@ export function generalizedErrorMessage(error: any): string {
 }
 
 /**
- * Helper function to get AptosConfig that supports Aptos and Custom networks
+ * Helper function to get CedraConfig that supports Cedra and Custom networks
  *
  * @param networkInfo
  * @param dappConfig
- * @returns AptosConfig
+ * @returns CedraConfig
  */
-export const getAptosConfig = (
+export const getCedraConfig = (
   networkInfo: NetworkInfo | null,
   dappConfig: DappConfig | undefined,
-): AptosConfig => {
+): CedraConfig => {
   if (!networkInfo) {
     throw new Error("Undefined network");
   }
 
-  if (isAptosNetwork(networkInfo)) {
+  if (isCedraNetwork(networkInfo)) {
     const currentNetwork = convertNetwork(networkInfo);
 
-    if (isAptosLiveNetwork(currentNetwork)) {
-      const apiKey = dappConfig?.aptosApiKeys;
-      return new AptosConfig({
+    if (isCedraLiveNetwork(currentNetwork)) {
+      const apiKey = dappConfig?.cedraApiKeys;
+      return new CedraConfig({
         network: currentNetwork,
         clientConfig: { API_KEY: apiKey ? apiKey[currentNetwork] : undefined },
       });
     }
 
-    return new AptosConfig({
+    return new CedraConfig({
       network: currentNetwork,
     });
   }
 
   const knownNetworks = {
-    okx: "https://wallet.okx.com/fullnode/aptos/discover/rpc",
+    okx: "https://wallet.okx.com/fullnode/cedra/discover/rpc",
   };
 
   if (networkInfo.url) {
@@ -88,7 +88,7 @@ export const getAptosConfig = (
     );
 
     if (isKnownNetwork) {
-      return new AptosConfig({
+      return new CedraConfig({
         network: Network.CUSTOM,
         fullnode: networkInfo.url,
       });
@@ -97,17 +97,17 @@ export const getAptosConfig = (
 
   // Custom networks are not supported, please ensure that the wallet is returning the appropriate network Mainnet, Testnet, Devnet, Local
   throw new Error(
-    `Invalid network, network ${networkInfo.name} not supported with Aptos wallet adapter to prevent user from using an unexpected network.`,
+    `Invalid network, network ${networkInfo.name} not supported with Cedra wallet adapter to prevent user from using an unexpected network.`,
   );
 };
 
 /**
- * Helper function to resolve if the current connected network is an Aptos network
+ * Helper function to resolve if the current connected network is an Cedra network
  *
  * @param networkInfo
  * @returns boolean
  */
-export const isAptosNetwork = (
+export const isCedraNetwork = (
   networkInfo: NetworkInfo | StandardNetworkInfo | null,
 ): boolean => {
   if (!networkInfo) {
@@ -116,7 +116,7 @@ export const isAptosNetwork = (
   return NetworkToNodeAPI[networkInfo.name] !== undefined;
 };
 
-export const isAptosLiveNetwork = (networkInfo: Network): boolean => {
+export const isCedraLiveNetwork = (networkInfo: Network): boolean => {
   return (
     networkInfo === "devnet" ||
     networkInfo === "testnet" ||
@@ -128,13 +128,13 @@ export const isAptosLiveNetwork = (networkInfo: Network): boolean => {
  * Helper function to fetch Devnet chain id
  */
 export const fetchDevnetChainId = async (): Promise<number> => {
-  const aptos = new Aptos(); // default to devnet
-  return await aptos.getChainId();
+  const cedra = new Cedra(); // default to devnet
+  return await cedra.getChainId();
 };
 
 /**
  * A helper function to handle the publish package transaction.
- * The Aptos SDK expects the metadataBytes and byteCode to be Uint8Array, but in case the arguments are passed in
+ * The Cedra SDK expects the metadataBytes and byteCode to be Uint8Array, but in case the arguments are passed in
  * as a string, this function converts the string to Uint8Array.
  */
 export const handlePublishPackageTransaction = (
@@ -176,6 +176,6 @@ export function convertNetwork(networkInfo: NetworkInfo | null): Network {
     case "local" as Network:
       return Network.LOCAL;
     default:
-      throw new Error("Invalid Aptos network name");
+      throw new Error("Invalid Cedra network name");
   }
 }

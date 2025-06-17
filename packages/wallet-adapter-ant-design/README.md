@@ -1,4 +1,4 @@
-# Aptos Wallet Adapter Selector Ant Design
+# Cedra Wallet Adapter Selector Ant Design
 
 Package for wallet selector modal using [Ant Design](https://ant.design/). Includes a `wallet connect` button when clicked, opens up a `wallet select modal`.
 
@@ -6,10 +6,10 @@ If wallet is already connected, the button would display the connected account a
 
 ### Usage
 
-Make sure you have [@aptos-labs/wallet-adapter-react](../wallet-adapter-react/README.md) installed
+Make sure you have [@cedra-labs/wallet-adapter-react](../wallet-adapter-react/README.md) installed
 
 ```
-npm install @aptos-labs/wallet-adapter-ant-design
+npm install @cedra-labs/wallet-adapter-ant-design
 ```
 
 on `index.tsx` / `_app.tsx` import the `ant-design` package `.css` file as
@@ -18,13 +18,13 @@ on `index.tsx` / `_app.tsx` import the `ant-design` package `.css` file as
 // If you use a local css file in your app, import it before the package's file as order matters
 import "./my-style-file.css";
 
-import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import "@cedra-labs/wallet-adapter-ant-design/dist/index.css";
 ```
 
 On the page you want to include the `wallet connect` button, import the `WalletSelector` module.
 
 ```
-import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+import { WalletSelector } from "@cedra-labs/wallet-adapter-ant-design";
 ...
 return (
   <WalletSelector />
@@ -47,21 +47,21 @@ You can override these classes
 .wallet-connect-install
 .wallet-button
 .wallet-modal-title
-.aptos-connect-button
-.aptos-connect-privacy-policy-wrapper
-.aptos-connect-privacy-policy-text
-.aptos-connect-privacy-policy-link
-.aptos-connect-powered-by
-.about-aptos-connect-trigger-wrapper
-.about-aptos-connect-trigger
-.about-aptos-connect-header
-.about-aptos-connect-graphic-wrapper
-.about-aptos-connect-text-wrapper
-.about-aptos-connect-title
-.about-aptos-connect-description
-.about-aptos-connect-footer-wrapper
-.about-aptos-connect-screen-indicators-wrapper
-.about-aptos-connect-screen-indicator
+.cedra-connect-button
+.cedra-connect-privacy-policy-wrapper
+.cedra-connect-privacy-policy-text
+.cedra-connect-privacy-policy-link
+.cedra-connect-powered-by
+.about-cedra-connect-trigger-wrapper
+.about-cedra-connect-trigger
+.about-cedra-connect-header
+.about-cedra-connect-graphic-wrapper
+.about-cedra-connect-text-wrapper
+.about-cedra-connect-title
+.about-cedra-connect-description
+.about-cedra-connect-footer-wrapper
+.about-cedra-connect-screen-indicators-wrapper
+.about-cedra-connect-screen-indicator
 ```
 
 For example, to override the `connect wallet` button background color, you can use the `.wallet-button` class in your local `.css` file

@@ -1,7 +1,7 @@
 {
-  "name": "@aptos-labs/cross-chain-core",
+  "name": "@cedra-labs/cross-chain-core",
   "version": "4.24.10",
-  "description": "Aptos Cross Chain Core",
+  "description": "Cedra Cross Chain Core",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,19 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter.git"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-wallet-adapter",
+  "homepage": "https://github.com/cedra-labs/cedra-wallet-adapter",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-wallet-adapter/issues"
+    "url": "https://github.com/cedra-labs/cedra-wallet-adapter/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "cedralabs.com",
   "keywords": [
-    "Aptos",
-    "Aptos Labs",
+    "Cedra",
+    "Cedra Labs",
     "Wallet",
     "Wallet Adapter",
-    "Aptos Wallet"
+    "Cedra Wallet"
   ],
   "scripts": {
     "update-version": "node -p \"'export const CROSS_CHAIN_CORE_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
@@ -39,8 +39,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@aptos-labs/eslint-config-adapter": "workspace:*",
-    "@aptos-labs/wallet-adapter-tsconfig": "workspace:*",
+    "@cedra-labs/eslint-config-adapter": "workspace:*",
+    "@cedra-labs/wallet-adapter-tsconfig": "workspace:*",
     "@types/jest": "^29.2.4",
     "@types/node": "^20.10.4",
     "eslint": "^8.15.0",
@@ -50,10 +50,10 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@aptos-labs/wallet-adapter-core": "workspace:*",
-    "@aptos-labs/derived-wallet-ethereum": "workspace:*",
-    "@aptos-labs/derived-wallet-solana": "workspace:*",
-    "@aptos-labs/wallet-standard": "^0.3.0",
+    "@cedra-labs/wallet-adapter-core": "workspace:*",
+    "@cedra-labs/derived-wallet-ethereum": "workspace:*",
+    "@cedra-labs/derived-wallet-solana": "workspace:*",
+    "@cedra-labs/wallet-standard": "^0.4.0",
     "@mysten/sui": "^1.21.2",
     "@mysten/wallet-standard": "^0.13.26",
     "@solana/spl-token": "^0.4.12",
@@ -62,7 +62,7 @@
     "@solana/web3.js": "^1.95.8",
     "@wallet-standard/app": "^1.1.0",
     "@wormhole-foundation/sdk": "1.5.2",
-    "@wormhole-foundation/sdk-aptos": "^1.5.2",
+    "@wormhole-foundation/sdk-cedra": "^1.5.2",
     "@wormhole-foundation/sdk-evm": "^1.5.2",
     "@wormhole-foundation/sdk-solana": "^1.5.2",
     "@wormhole-foundation/sdk-sui": "^1.10.0",
@@ -75,7 +75,7 @@
     "tweetnacl": "^1.0.3"
   },
   "peerDependencies": {
-    "@aptos-labs/ts-sdk": "^1.38.0 || ^2.0.0"
+    "@cedra-labs/ts-sdk": "^1.38.0 || ^2.0.0"
   },
   "files": [
     "dist",

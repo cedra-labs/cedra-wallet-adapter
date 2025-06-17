@@ -2,11 +2,11 @@
 
 # Derived Wallet Ethereum
 
-A light-weight add-on package to the [@aptos-labs/wallet-adapter-react](../wallet-adapter-react/) that enables the functionality to use an EVM wallet as a Native Aptos Wallet
+A light-weight add-on package to the [@cedra-labs/wallet-adapter-react](../wallet-adapter-react/) that enables the functionality to use an EVM wallet as a Native Cedra Wallet
 
 ### How does EVM wallet work with the wallet adapter?
 
-When a user connects to a dApp using a supported EVM wallet, the adapter computes the user's Derivable Abstracted Account (DAA) address and converts the EVM account to follow the Aptos wallet standard interface.
+When a user connects to a dApp using a supported EVM wallet, the adapter computes the user's Derivable Abstracted Account (DAA) address and converts the EVM account to follow the Cedra wallet standard interface.
 This ensures a seamless interaction with the wallet for both developers and end users.
 
 The computation of the DAA address is done using the `authenticationFunction` and the `accountIdentity`, both of which are defined in this package:
@@ -21,7 +21,7 @@ The computation of the DAA address is done using the `authenticationFunction` an
 The package follows the [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) to discover wallets.
 Currently, the wallets that have been tested and support cross-chain accounts are:
 
-|          | Aptos Devnet | Aptos Testnet | Aptos Mainnet |
+|          | Cedra Devnet | Cedra Testnet | Cedra Mainnet |
 | -------- | ------------ | ------------- | ------------- |
 | Metamask | ✅           |               |
 | Phantom  | ✅           |               |
@@ -32,59 +32,59 @@ Currently, the wallets that have been tested and support cross-chain accounts ar
 
 ### Usage
 
-1. Install the [@aptos-labs/wallet-adapter-react](../wallet-adapter-react/) package
+1. Install the [@cedra-labs/wallet-adapter-react](../wallet-adapter-react/) package
 
 ```bash
-npm install @aptos-labs/wallet-adapter-react
+npm install @cedra-labs/wallet-adapter-react
 ```
 
-2. Install the package `@aptos-labs/derived-wallet-ethereum`
+2. Install the package `@cedra-labs/derived-wallet-ethereum`
 
 ```bash
-npm install @aptos-labs/derived-wallet-ethereum
+npm install @cedra-labs/derived-wallet-ethereum
 ```
 
 3. Import the automatic detection function
 
 ```tsx
-import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
-import { setupAutomaticEthereumWalletDerivation } from "@aptos-labs/derived-wallet-ethereum";
+import { CedraWalletAdapterProvider } from "@cedra-labs/wallet-adapter-react";
+import { setupAutomaticEthereumWalletDerivation } from "@cedra-labs/derived-wallet-ethereum";
 
-setupAutomaticEthereumWalletDerivation({ defaultNetwork: Network.DEVNET }); // Network.DEVNET is the Aptos network your dapp is working with
+setupAutomaticEthereumWalletDerivation({ defaultNetwork: Network.DEVNET }); // Network.DEVNET is the Cedra network your dapp is working with
 
 .....
 
-<AptosWalletAdapterProvider
+<CedraWalletAdapterProvider
  dappConfig={{
     network: Network.DEVNET,
   }}
 >
   {children}
-<AptosWalletAdapterProvider/>
+<CedraWalletAdapterProvider/>
 ```
 
 #### Submitting a transaction
 
-In most cases, allowing users to submit a transaction with an EVM account to the Aptos chain requires using a sponsor transaction.
+In most cases, allowing users to submit a transaction with an EVM account to the Cedra chain requires using a sponsor transaction.
 This is because the EVM account might not have APT to pay for gas.
 Therefore, the dApp should consider maintaining a sponsor account to sponsor the transactions.
 
 ```tsx filename="SignAndSubmitDemo.tsx"
 import React from "react";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useWallet } from "@cedra-labs/wallet-adapter-react";
 import {
-  Aptos,
-  AptosConfig,
+  Cedra,
+  CedraConfig,
   Network,
   Ed25519PrivateKey,
   PrivateKey,
   PrivateKeyVariants,
   Account,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 
-// Initialize an Aptos client
-const config = new AptosConfig({ network: Network.DEVNET });
-const aptos = new Aptos(config);
+// Initialize an Cedra client
+const config = new CedraConfig({ network: Network.DEVNET });
+const cedra = new Cedra(config);
 
 // Generate a sponsor account or use an existing account
 const privateKey = new Ed25519PrivateKey(
@@ -104,9 +104,9 @@ const SignAndSubmit = () => {
 
     try {
       // Build the transaction
-      const rawTransaction = await aptos.transaction.build.simple({
+      const rawTransaction = await cedra.transaction.build.simple({
         data: {
-          function: "0x1::aptos_account::transfer",
+          function: "0x1::cedra_account::transfer",
           functionArguments: [account.address.toString(), 1],
         },
         sender: account.address,
@@ -119,13 +119,13 @@ const SignAndSubmit = () => {
       });
 
       // Sponsor account signs the transaction to pay for the gas fees
-      const sponsorAuthenticator = aptos.transaction.signAsFeePayer({
+      const sponsorAuthenticator = cedra.transaction.signAsFeePayer({
         signer: sponsor,
         transaction: rawTransaction,
       });
 
       // Submit the transaction to chain
-      const txnSubmitted = await aptosClient(network).transaction.submit.simple(
+      const txnSubmitted = await cedraClient(network).transaction.submit.simple(
         {
           transaction: rawTransaction,
           senderAuthenticator: walletSignedTransaction.authenticator,
@@ -134,7 +134,7 @@ const SignAndSubmit = () => {
       );
 
       // if you want to wait for transaction
-      await aptos.waitForTransaction({ transactionHash: txnSubmitted.hash });
+      await cedra.waitForTransaction({ transactionHash: txnSubmitted.hash });
     } catch (error) {
       console.error(error);
     }
@@ -152,11 +152,11 @@ export default SignAndSubmit;
 
 ### Considerations
 
-- Since the origin wallet most likely not integrated with Aptos, simulation is not available in the wallet.
+- Since the origin wallet most likely not integrated with Cedra, simulation is not available in the wallet.
 - The package retains the origin wallet, so developers should be able to use it and interact with it by:
 
 ```tsx
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useWallet } from "@cedra-labs/wallet-adapter-react";
 
 const { isEIP1193DerivedWallet } = useWallet();
 
@@ -168,7 +168,7 @@ if (isEIP1193DerivedWallet(wallet)) {
 ### Resources
 
 - X-Chain Accounts Adapter Demo App
-  - [Live site](https://aptos-labs.github.io/aptos-wallet-adapter/nextjs-cross-chain-example/)
+  - [Live site](https://cedra-labs.github.io/cedra-wallet-adapter/nextjs-cross-chain-example/)
   - [Source code](../../apps/nextjs-x-chain/)
-- [AIP-113 Derivable Account Abstraction](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-113.md)
-- [AIP-122 x-chain DAA authentication using Sign-in-With-Ethereum](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-122.md)
+- [AIP-113 Derivable Account Abstraction](https://github.com/cedra-foundation/AIPs/blob/main/aips/aip-113.md)
+- [AIP-122 x-chain DAA authentication using Sign-in-With-Ethereum](https://github.com/cedra-foundation/AIPs/blob/main/aips/aip-122.md)

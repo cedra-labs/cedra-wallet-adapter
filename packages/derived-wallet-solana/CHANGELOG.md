@@ -1,12 +1,12 @@
-# @aptos-labs/derived-wallet-solana
+# @cedra-labs/derived-wallet-solana
 
 ## 0.2.5
 
 ### Patch Changes
 
-- 33d0055: Use aptos ts-sdk version 2.0.0 as a peer dependency
+- 33d0055: Use cedra ts-sdk version 2.0.0 as a peer dependency
 - Updated dependencies [33d0055]
-  - @aptos-labs/derived-wallet-base@0.2.1
+  - @cedra-labs/derived-wallet-base@0.2.1
 
 ## 0.2.4
 
@@ -16,7 +16,7 @@
 - 1b67719: Add Solana sign message fallback support
 - Updated dependencies [1b67719]
 - Updated dependencies [476003f]
-  - @aptos-labs/derived-wallet-base@0.2.0
+  - @cedra-labs/derived-wallet-base@0.2.0
 
 ## 0.2.3
 
@@ -24,7 +24,7 @@
 
 - 3effbab: Only allowing Phantom as whitelisted wallet for now
 - Updated dependencies [c62ccb7]
-  - @aptos-labs/derived-wallet-base@0.1.2
+  - @cedra-labs/derived-wallet-base@0.1.2
 
 ## 0.2.2
 
@@ -48,7 +48,7 @@
 
 - 8a2b3b6: Fetch the devnet chain id when x-chain wallet is configured to use the devnet
 - Updated dependencies [8a2b3b6]
-  - @aptos-labs/derived-wallet-base@0.1.1
+  - @cedra-labs/derived-wallet-base@0.1.1
 
 ## 0.1.1
 
@@ -64,6 +64,6 @@
 
 ### Patch Changes
 
-- 5ba8ae3: Extracted `signAptosTransactionWithSolana` and `signAptosStructuredMessageWithSolana`
+- 5ba8ae3: Extracted `signCedraTransactionWithSolana` and `signCedraStructuredMessageWithSolana`
 - Updated dependencies [5da289f]
-  - @aptos-labs/derived-wallet-base@0.1.0
+  - @cedra-labs/derived-wallet-base@0.1.0

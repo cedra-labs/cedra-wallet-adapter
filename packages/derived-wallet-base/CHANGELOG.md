@@ -1,10 +1,10 @@
-# @aptos-labs/derived-wallet-base
+# @cedra-labs/derived-wallet-base
 
 ## 0.2.1
 
 ### Patch Changes
 
-- 33d0055: Use aptos ts-sdk version 2.0.0 as a peer dependency
+- 33d0055: Use cedra ts-sdk version 2.0.0 as a peer dependency
 
 ## 0.2.0
 

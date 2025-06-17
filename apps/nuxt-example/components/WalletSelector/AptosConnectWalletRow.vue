@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {
-  AnyAptosWallet,
+  AnyCedraWallet,
   WalletItem,
   WalletIcon,
   WalletName,
-} from "@aptos-labs/wallet-adapter-vue";
+} from "@cedra-labs/wallet-adapter-vue";
 
 interface Props {
-  wallet: AnyAptosWallet;
+  wallet: AnyCedraWallet;
   onConnect: () => void;
 }
 

@@ -7,8 +7,8 @@ import {
   PlatformLoader,
   TransferState,
 } from "@wormhole-foundation/sdk";
-import { Network, sleep } from "@aptos-labs/ts-sdk";
-import aptos from "@wormhole-foundation/sdk/aptos";
+import { Network, sleep } from "@cedra-labs/ts-sdk";
+import cedra from "@wormhole-foundation/sdk/cedra";
 import solana from "@wormhole-foundation/sdk/solana";
 import evm from "@wormhole-foundation/sdk/evm";
 
@@ -18,7 +18,7 @@ import {
   CrossChainCore,
 } from "../../CrossChainCore";
 import { logger } from "../../utils/logger";
-import { AptosLocalSigner } from "./signers/AptosLocalSigner";
+import { CedraLocalSigner } from "./signers/CedraLocalSigner";
 import { Signer } from "./signers/Signer";
 import { ChainConfig } from "../../config";
 import {
@@ -32,8 +32,8 @@ import {
   WormholeStartTransferResponse,
   WormholeClaimTransferRequest,
 } from "./types";
-import { SolanaDerivedWallet } from "@aptos-labs/derived-wallet-solana";
-import { EIP1193DerivedWallet } from "@aptos-labs/derived-wallet-ethereum";
+import { SolanaDerivedWallet } from "@cedra-labs/derived-wallet-solana";
+import { EIP1193DerivedWallet } from "@cedra-labs/derived-wallet-ethereum";
 
 export class WormholeProvider
   implements
@@ -61,7 +61,7 @@ export class WormholeProvider
   }
 
   async setWormholeContext(sourceChain: Chain) {
-    const dappNetwork = this.crossChainCore._dappConfig?.aptosNetwork;
+    const dappNetwork = this.crossChainCore._dappConfig?.cedraNetwork;
     if (dappNetwork === Network.DEVNET) {
       throw new Error("Devnet is not supported on Wormhole");
     }
@@ -69,7 +69,7 @@ export class WormholeProvider
       throw new Error("Origin chain not selected");
     }
     const isMainnet = dappNetwork === Network.MAINNET;
-    const platforms: PlatformLoader<any>[] = [aptos, solana, evm];
+    const platforms: PlatformLoader<any>[] = [cedra, solana, evm];
     const wh = await wormhole(isMainnet ? "Mainnet" : "Testnet", platforms);
     this._wormholeContext = wh;
   }
@@ -91,8 +91,8 @@ export class WormholeProvider
     logger.log("sourceContext", sourceContext);
 
     const destContext = this._wormholeContext
-      .getPlatform(chainToPlatform("Aptos"))
-      .getChain("Aptos");
+      .getPlatform(chainToPlatform("Cedra"))
+      .getChain("Cedra");
 
     logger.log("destContext", destContext);
 
@@ -191,7 +191,7 @@ export class WormholeProvider
       this.wormholeRequest,
       signer,
       this.wormholeQuote,
-      Wormhole.chainAddress("Aptos", destinationAddress.toString()),
+      Wormhole.chainAddress("Cedra", destinationAddress.toString()),
     );
 
     const originChainTxnId =
@@ -223,8 +223,8 @@ export class WormholeProvider
             logger.log("Receipt is on track ", receipt);
 
             try {
-              const signer = new AptosLocalSigner(
-                "Aptos",
+              const signer = new CedraLocalSigner(
+                "Cedra",
                 {},
                 mainSigner, // the account that signs the "claim" transaction
                 sponsorAccount ? sponsorAccount : undefined, // the fee payer account
@@ -268,7 +268,7 @@ export class WormholeProvider
   async initiateCCTPTransfer(
     input: WormholeInitiateTransferRequest,
   ): Promise<WormholeInitiateTransferResponse> {
-    if (this.crossChainCore._dappConfig?.aptosNetwork === Network.DEVNET) {
+    if (this.crossChainCore._dappConfig?.cedraNetwork === Network.DEVNET) {
       throw new Error("Devnet is not supported on Wormhole");
     }
     // if amount is provided, it is expected to get the quote internally
@@ -311,8 +311,8 @@ export class WormholeProvider
     );
 
     const destToken: TokenId = Wormhole.tokenId(
-      this.crossChainCore.APTOS_TOKEN.tokenId.chain as Chain,
-      this.crossChainCore.APTOS_TOKEN.tokenId.address,
+      this.crossChainCore.CEDRA_TOKEN.tokenId.chain as Chain,
+      this.crossChainCore.CEDRA_TOKEN.tokenId.address,
     );
 
     return { sourceToken, destToken };

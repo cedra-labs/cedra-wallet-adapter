@@ -1,19 +1,19 @@
 import {
   Account,
   AccountAddress,
-  Aptos,
-  AptosConfig,
+  Cedra,
+  CedraConfig,
   Ed25519PrivateKey,
   Network,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 const claimSecretKeyStorageKey = "@wallet-adapter-example-dapp/claimSecretKey";
 
-const config = new AptosConfig({ network: Network.TESTNET });
-const aptos = new Aptos(config);
+const config = new CedraConfig({ network: Network.TESTNET });
+const cedra = new Cedra(config);
 
 function getPersistedClaimSecretKey() {
   if (typeof window === "undefined") {
@@ -49,9 +49,9 @@ export function useClaimSecretKey() {
   const { data: claimableBalance } = useQuery({
     queryKey: ["accounts", claimAccountAddress, "aptBalance"],
     queryFn: async () =>
-      aptos.getAccountCoinAmount({
+      cedra.getAccountCoinAmount({
         accountAddress: claimAccountAddress!,
-        coinType: "0x1::aptos_coin::AptosCoin",
+        coinType: "0x1::cedra_coin::CedraCoin",
       }),
     enabled: claimAccountAddress !== undefined,
   });
@@ -62,7 +62,7 @@ export function useClaimSecretKey() {
     isSuccess: isFunded,
   } = useMutation({
     mutationFn: async (accountAddress: AccountAddress) =>
-      aptos.fundAccount({
+      cedra.fundAccount({
         accountAddress,
         amount: 1e8 - (claimableBalance ?? 0),
       }),

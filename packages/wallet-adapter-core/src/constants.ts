@@ -19,9 +19,9 @@ export const ChainIdToAnsSupportedNetworkMap: Record<string, string> = {
   "2": "testnet", // testnet
 };
 
-/** The base URL for all Aptos Connect wallets. */
-export const APTOS_CONNECT_BASE_URL = "https://aptosconnect.app";
+/** The base URL for all Cedra Connect wallets. */
+export const CEDRA_CONNECT_BASE_URL = "https://cedraconnect.app";
 
-/** The URL to the Aptos Connect account page if the user is signed in to Aptos Connect. */
-export const APTOS_CONNECT_ACCOUNT_URL =
-  "https://aptosconnect.app/dashboard/main-account";
+/** The URL to the Cedra Connect account page if the user is signed in to Cedra Connect. */
+export const CEDRA_CONNECT_ACCOUNT_URL =
+  "https://cedraconnect.app/dashboard/main-account";

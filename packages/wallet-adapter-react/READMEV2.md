@@ -1,16 +1,16 @@
-This README is for the `@aptos-labs/wallet-adapter-react v3.*.*`
+This README is for the `@cedra-labs/wallet-adapter-react v3.*.*`
 
-> **_NOTE:_** This documentation is for Wallet Adapter `v2.0.0` and up that is fully compatible with the Aptos TypeScript SDK V2. For Wallet Adapter `v^1.*.*` refer to [this guide](./READMEV1.md)
+> **_NOTE:_** This documentation is for Wallet Adapter `v2.0.0` and up that is fully compatible with the Cedra TypeScript SDK V2. For Wallet Adapter `v^1.*.*` refer to [this guide](./READMEV1.md)
 
 # Wallet Adapter React Provider
 
-A react provider wrapper for the Aptos Wallet Adapter
+A react provider wrapper for the Cedra Wallet Adapter
 
 Dapps that want to use the adapter should install this package and other supported wallet packages.
 
 ### Support
 
-The react provider supports all [wallet standard](https://aptos.dev/integration/wallet-adapter-for-wallets#aip-62-wallet-standard) functions and feature functions
+The react provider supports all [wallet standard](https://cedra.dev/integration/wallet-adapter-for-wallets#aip-62-wallet-standard) functions and feature functions
 
 ##### Standard functions
 
@@ -38,18 +38,18 @@ submitTransaction
 #### Install Dependencies
 
 Install wallet dependencies you want to include in your app.
-To do that, you can look at our [supported wallets list](https://github.com/aptos-labs/aptos-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
+To do that, you can look at our [supported wallets list](https://github.com/cedra-labs/cedra-wallet-adapter#supported-wallet-packages). Each wallet is a link to npm package where you can install it from.
 
-Next, install the `@aptos-labs/wallet-adapter-react`
+Next, install the `@cedra-labs/wallet-adapter-react`
 
 ```
-pnpm i @aptos-labs/wallet-adapter-react
+pnpm i @cedra-labs/wallet-adapter-react
 ```
 
 using npm
 
 ```
-npm i @aptos-labs/wallet-adapter-react
+npm i @cedra-labs/wallet-adapter-react
 ```
 
 #### Import dependencies
@@ -59,38 +59,38 @@ On the `App.jsx` file,
 Import the installed wallets.
 
 ```js
-import { SomeAptosWallet } from "some-aptos-wallet-package";
+import { SomeCedraWallet } from "some-cedra-wallet-package";
 ```
 
-Import the `AptosWalletAdapterProvider`.
+Import the `CedraWalletAdapterProvider`.
 
 ```js
-import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
+import { CedraWalletAdapterProvider } from "@cedra-labs/wallet-adapter-react";
 ```
 
 Wrap your app with the Provider, pass it the relevant props.
 
 ```js
-const wallets = [new AptosLegacyStandardWallet()];
+const wallets = [new CedraLegacyStandardWallet()];
 
-<AptosWalletAdapterProvider
+<CedraWalletAdapterProvider
   plugins={wallets}
   autoConnect={true}
   optInWallets={["Petra"]}
-  dappConfig={{ network: network.MAINNET, aptosApiKey: "my-generated-api-key" }}
+  dappConfig={{ network: network.MAINNET, cedraApiKey: "my-generated-api-key" }}
   onError={(error) => {
     console.log("error", error);
   }}
 >
   <App />
-</AptosWalletAdapterProvider>;
+</CedraWalletAdapterProvider>;
 ```
 
 #### Available Provider Props
 
 - `dappConfig` - Config used to initialize the dapp with.
   - `network` - the network the dapp works with
-  - `aptosApiKey` - an api key generated from https://developers.aptoslabs.com/docs/api-access
+  - `cedraApiKey` - an api key generated from https://developers.cedralabs.com/docs/api-access
 - `onError` - a callback function to fire when the adapter throws an error
 - `plugins` - any legacy standard wallet, i.e a wallet that is not AIP-62 standard compatible, should be installed and passed in this array. [Check here](../../README.md#supported-wallet-packages) for a list of AIP-62 and legacy standard wallets.
 - `autoConnect` - a prop indicates whether the dapp should auto connect with a previous connected wallet.
@@ -99,10 +99,10 @@ const wallets = [new AptosLegacyStandardWallet()];
 
 #### Use Wallet
 
-On any page you want to use the wallet props, import `useWallet` from `@aptos-labs/wallet-adapter-react`
+On any page you want to use the wallet props, import `useWallet` from `@cedra-labs/wallet-adapter-react`
 
 ```js
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useWallet } from "@cedra-labs/wallet-adapter-react";
 ```
 
 Then you can use the exported properties
@@ -134,15 +134,15 @@ The available UI Packages are
 - [Ant Design](<(../wallet-adapter-ant-design/)>)
 - [MUI](../wallet-adapter-mui-design/)
 
-If you want to create your own wallet selector UI from existing components and styles in your app, `@aptos-labs/wallet-adapter-react` provides a series of headless components and utilities to simplify this process so that you can focus on writing CSS instead of implementing business logic. For more information, check out the [Building Your Own Wallet Selector](./docs/BYO-wallet-selector.md) document.
+If you want to create your own wallet selector UI from existing components and styles in your app, `@cedra-labs/wallet-adapter-react` provides a series of headless components and utilities to simplify this process so that you can focus on writing CSS instead of implementing business logic. For more information, check out the [Building Your Own Wallet Selector](./docs/BYO-wallet-selector.md) document.
 
 #### Examples
 
-##### Initialize Aptos
+##### Initialize Cedra
 
 ```js
-const aptosConfig = new AptosConfig({ network: Network.MAINNET });
-const aptos = new Aptos(aptosConfig);
+const cedraConfig = new CedraConfig({ network: Network.MAINNET });
+const cedra = new Cedra(cedraConfig);
 ```
 
 ##### connect(walletName)
@@ -169,13 +169,13 @@ const onSignAndSubmitTransaction = async () => {
     sender: account.address,
     data: {
       function: "0x1::coin::transfer",
-      typeArguments: ["0x1::aptos_coin::AptosCoin"],
+      typeArguments: ["0x1::cedra_coin::CedraCoin"],
       functionArguments: [account.address, 1],
     },
   });
   // if you want to wait for transaction
   try {
-    await aptos.waitForTransaction({ transactionHash: response.hash });
+    await cedra.waitForTransaction({ transactionHash: response.hash });
   } catch (error) {
     console.error(error);
   }
@@ -194,13 +194,13 @@ const onSignAndSubmitBCSTransaction = async () => {
     sender: account.address,
     data: {
       function: "0x1::coin::transfer",
-      typeArguments: [parseTypeTag(APTOS_COIN)],
+      typeArguments: [parseTypeTag(CEDRA_COIN)],
       functionArguments: [AccountAddress.from(account.address), new U64(1)],
     },
   });
   // if you want to wait for transaction
   try {
-    await aptos.waitForTransaction({ transactionHash: response.hash });
+    await cedra.waitForTransaction({ transactionHash: response.hash });
   } catch (error) {
     console.error(error);
   }
@@ -216,7 +216,7 @@ const onSignAndSubmitBCSTransaction = async () => {
 ```js
 const onSignMessage = async () => {
   const payload = {
-    message: "Hello from Aptos Wallet Adapter",
+    message: "Hello from Cedra Wallet Adapter",
     nonce: "random_string",
   };
   const response = await signMessage(payload);
@@ -261,7 +261,7 @@ const onSignTransaction = async () => {
   const payload = {
     type: "entry_function_payload",
     function: "0x1::coin::transfer",
-    type_arguments: ["0x1::aptos_coin::AptosCoin"],
+    type_arguments: ["0x1::cedra_coin::CedraCoin"],
     arguments: [account?.address, 1], // 1 is in Octas
   };
   const response = await signTransaction(payload);
@@ -275,7 +275,7 @@ const onSignTransaction = async () => {
 ```js
 const onSignMessageAndVerify = async () => {
   const payload = {
-    message: "Hello from Aptos Wallet Adapter",
+    message: "Hello from Cedra Wallet Adapter",
     nonce: "random_string",
   };
   const response = await signMessageAndVerify(payload);

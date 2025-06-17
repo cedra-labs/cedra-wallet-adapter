@@ -1,7 +1,7 @@
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
-import { NetworkInfo } from "@aptos-labs/wallet-adapter-core";
+import { Cedra, CedraConfig, Network } from "@cedra-labs/ts-sdk";
+import { NetworkInfo } from "@cedra-labs/wallet-adapter-core";
 
-export const aptosClient = (network?: NetworkInfo | null) => {
+export const cedraClient = (network?: NetworkInfo | null) => {
   if (network?.name === Network.DEVNET) {
     return DEVNET_CLIENT;
   } else if (network?.name === Network.TESTNET) {
@@ -9,23 +9,23 @@ export const aptosClient = (network?: NetworkInfo | null) => {
   } else if (network?.name === Network.MAINNET) {
     throw new Error("Please use devnet or testnet for testing");
   } else {
-    const CUSTOM_CONFIG = new AptosConfig({
+    const CUSTOM_CONFIG = new CedraConfig({
       network: Network.CUSTOM,
       fullnode: network?.url,
     });
-    return new Aptos(CUSTOM_CONFIG);
+    return new Cedra(CUSTOM_CONFIG);
   }
 };
 
 // Devnet client
-export const DEVNET_CONFIG = new AptosConfig({
+export const DEVNET_CONFIG = new CedraConfig({
   network: Network.DEVNET,
 });
-export const DEVNET_CLIENT = new Aptos(DEVNET_CONFIG);
+export const DEVNET_CLIENT = new Cedra(DEVNET_CONFIG);
 
 // Testnet client
-export const TESTNET_CONFIG = new AptosConfig({ network: Network.TESTNET });
-export const TESTNET_CLIENT = new Aptos(TESTNET_CONFIG);
+export const TESTNET_CONFIG = new CedraConfig({ network: Network.TESTNET });
+export const TESTNET_CLIENT = new Cedra(TESTNET_CONFIG);
 
 export const isSendableNetwork = (
   connected: boolean,

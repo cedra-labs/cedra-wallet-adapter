@@ -1,19 +1,19 @@
 import { forwardRef } from "react";
-import { SmallAptosLogo } from "../graphics/SmallAptosLogo";
+import { SmallCedraLogo } from "../graphics/SmallCedraLogo";
 import { HeadlessComponentProps, createHeadlessComponent } from "./utils";
 
-export const APTOS_PRIVACY_POLICY_URL = "https://aptoslabs.com/privacy";
+export const CEDRA_PRIVACY_POLICY_URL = "https://cedralabs.com/privacy";
 
-const Root = createHeadlessComponent("AptosPrivacyPolicy.Root", "div");
+const Root = createHeadlessComponent("CedraPrivacyPolicy.Root", "div");
 
 const Disclaimer = createHeadlessComponent(
-  "AptosPrivacyPolicy.Disclaimer",
+  "CedraPrivacyPolicy.Disclaimer",
   "span",
-  { children: "By continuing, you agree to Aptos Labs'" },
+  { children: "By continuing, you agree to Cedra Labs'" },
 );
 
-const Link = createHeadlessComponent("AptosPrivacyPolicy.Disclaimer", "a", {
-  href: APTOS_PRIVACY_POLICY_URL,
+const Link = createHeadlessComponent("CedraPrivacyPolicy.Disclaimer", "a", {
+  href: CEDRA_PRIVACY_POLICY_URL,
   target: "_blank",
   rel: "noopener noreferrer",
   children: "Privacy Policy",
@@ -26,18 +26,18 @@ const PoweredBy = forwardRef<
   return (
     <div ref={ref} className={className}>
       <span>Powered by</span>
-      <SmallAptosLogo />
-      <span>Aptos Labs</span>
+      <SmallCedraLogo />
+      <span>Cedra Labs</span>
     </div>
   );
 });
-PoweredBy.displayName = "AptosPrivacyPolicy.PoweredBy";
+PoweredBy.displayName = "CedraPrivacyPolicy.PoweredBy";
 
 /**
- * A headless component for rendering the Aptos Labs privacy policy disclaimer
- * that should be placed under the Aptos Connect login options.
+ * A headless component for rendering the Cedra Labs privacy policy disclaimer
+ * that should be placed under the Cedra Connect login options.
  */
-export const AptosPrivacyPolicy = Object.assign(Root, {
+export const CedraPrivacyPolicy = Object.assign(Root, {
   Disclaimer,
   Link,
   PoweredBy,

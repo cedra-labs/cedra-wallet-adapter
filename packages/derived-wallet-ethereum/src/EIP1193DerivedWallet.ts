@@ -2,34 +2,34 @@ import {
   fetchDevnetChainId,
   isNullCallback,
   mapUserResponse,
-} from "@aptos-labs/derived-wallet-base";
+} from "@cedra-labs/derived-wallet-base";
 import {
   AccountAuthenticator,
   AnyRawTransaction,
   Network,
   NetworkToChainId,
   NetworkToNodeAPI,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import {
   AccountInfo,
-  APTOS_CHAINS,
-  AptosChangeNetworkOutput,
-  AptosConnectOutput,
-  AptosFeatures,
-  AptosSignMessageInput,
-  AptosSignMessageOutput,
-  AptosWallet,
+  CEDRA_CHAINS,
+  CedraChangeNetworkOutput,
+  CedraConnectOutput,
+  CedraFeatures,
+  CedraSignMessageInput,
+  CedraSignMessageOutput,
+  CedraWallet,
   NetworkInfo,
   UserResponse,
   UserResponseStatus,
   WalletIcon,
-} from "@aptos-labs/wallet-standard";
+} from "@cedra-labs/wallet-standard";
 import { BrowserProvider } from "ethers";
 import type { EIP1193Provider, EIP6963ProviderDetail } from "mipd";
 import { EIP1193DerivedPublicKey } from "./EIP1193DerivedPublicKey";
 import { EthereumAddress, wrapEthersUserResponse } from "./shared";
-import { signAptosMessageWithEthereum } from "./signAptosMessage";
-import { signAptosTransactionWithEthereum } from "./signAptosTransaction";
+import { signCedraMessageWithEthereum } from "./signCedraMessage";
+import { signCedraTransactionWithEthereum } from "./signCedraTransaction";
 
 const defaultAuthenticationFunction =
   "0x1::ethereum_derivable_account::authenticate";
@@ -39,7 +39,7 @@ export interface EIP1193DerivedWalletOptions {
   defaultNetwork?: Network;
 }
 
-export class EIP1193DerivedWallet implements AptosWallet {
+export class EIP1193DerivedWallet implements CedraWallet {
   readonly eip1193Provider: EIP1193Provider;
   readonly eip1193Ethers: BrowserProvider;
   readonly domain: string;
@@ -51,7 +51,7 @@ export class EIP1193DerivedWallet implements AptosWallet {
   readonly icon: WalletIcon;
   readonly url: string;
   readonly accounts = [];
-  readonly chains = APTOS_CHAINS;
+  readonly chains = CEDRA_CHAINS;
 
   constructor(
     providerDetail: EIP6963ProviderDetail,
@@ -75,40 +75,40 @@ export class EIP1193DerivedWallet implements AptosWallet {
     this.url = info.rdns;
   }
 
-  readonly features: AptosFeatures = {
-    "aptos:connect": {
+  readonly features: CedraFeatures = {
+    "cedra:connect": {
       version: "1.0.0",
       connect: () => this.connect(),
     },
-    "aptos:disconnect": {
+    "cedra:disconnect": {
       version: "1.0.0",
       disconnect: () => this.disconnect(),
     },
-    "aptos:account": {
+    "cedra:account": {
       version: "1.0.0",
       account: () => this.getActiveAccount(),
     },
-    "aptos:onAccountChange": {
+    "cedra:onAccountChange": {
       version: "1.0.0",
       onAccountChange: async (callback) => this.onActiveAccountChange(callback),
     },
-    "aptos:network": {
+    "cedra:network": {
       version: "1.0.0",
       network: () => this.getActiveNetwork(),
     },
-    "aptos:changeNetwork": {
+    "cedra:changeNetwork": {
       version: "1.0.0",
       changeNetwork: (newNetwork) => this.changeNetwork(newNetwork),
     },
-    "aptos:onNetworkChange": {
+    "cedra:onNetworkChange": {
       version: "1.0.0",
       onNetworkChange: async (callback) => this.onActiveNetworkChange(callback),
     },
-    "aptos:signMessage": {
+    "cedra:signMessage": {
       version: "1.0.0",
       signMessage: (args) => this.signMessage(args),
     },
-    "aptos:signTransaction": {
+    "cedra:signTransaction": {
       version: "1.0.0",
       signTransaction: (...args) => this.signTransaction(...args),
     },
@@ -124,7 +124,7 @@ export class EIP1193DerivedWallet implements AptosWallet {
 
   // region Connection
 
-  async connect(): Promise<UserResponse<AptosConnectOutput>> {
+  async connect(): Promise<UserResponse<CedraConnectOutput>> {
     const response = await wrapEthersUserResponse(
       this.eip1193Ethers.getSigner(),
     );
@@ -132,8 +132,8 @@ export class EIP1193DerivedWallet implements AptosWallet {
       const publicKey = this.derivePublicKey(
         account.address as EthereumAddress,
       );
-      const aptosAddress = publicKey.authKey().derivedAddress();
-      return new AccountInfo({ publicKey, address: aptosAddress });
+      const cedraAddress = publicKey.authKey().derivedAddress();
+      return new AccountInfo({ publicKey, address: cedraAddress });
     });
   }
 
@@ -153,8 +153,8 @@ export class EIP1193DerivedWallet implements AptosWallet {
     const publicKey = this.derivePublicKey(
       activeAccount.address as EthereumAddress,
     );
-    const aptosAddress = publicKey.authKey().derivedAddress();
-    return new AccountInfo({ publicKey, address: aptosAddress });
+    const cedraAddress = publicKey.authKey().derivedAddress();
+    return new AccountInfo({ publicKey, address: cedraAddress });
   }
 
   private onAccountsChangedListeners: ((
@@ -174,8 +174,8 @@ export class EIP1193DerivedWallet implements AptosWallet {
           return;
         }
         const publicKey = this.derivePublicKey(ethereumAddress);
-        const aptosAddress = publicKey.authKey().derivedAddress();
-        const account = new AccountInfo({ publicKey, address: aptosAddress });
+        const cedraAddress = publicKey.authKey().derivedAddress();
+        const account = new AccountInfo({ publicKey, address: cedraAddress });
         callback(account);
       };
       this.onAccountsChangedListeners.push(listener);
@@ -203,7 +203,7 @@ export class EIP1193DerivedWallet implements AptosWallet {
 
   async changeNetwork(
     newNetwork: NetworkInfo,
-  ): Promise<UserResponse<AptosChangeNetworkOutput>> {
+  ): Promise<UserResponse<CedraChangeNetworkOutput>> {
     const { name, chainId, url } = newNetwork;
     if (name === Network.CUSTOM) {
       throw new Error("Custom network not currently supported");
@@ -235,13 +235,13 @@ export class EIP1193DerivedWallet implements AptosWallet {
   // region Signatures
 
   async signMessage(
-    input: AptosSignMessageInput,
-  ): Promise<UserResponse<AptosSignMessageOutput>> {
+    input: CedraSignMessageInput,
+  ): Promise<UserResponse<CedraSignMessageOutput>> {
     const chainId =
       this.defaultNetwork === Network.DEVNET
         ? await fetchDevnetChainId()
         : NetworkToChainId[this.defaultNetwork];
-    return signAptosMessageWithEthereum({
+    return signCedraMessageWithEthereum({
       eip1193Provider: this.eip1193Provider,
       authenticationFunction: this.authenticationFunction,
       messageInput: {
@@ -255,7 +255,7 @@ export class EIP1193DerivedWallet implements AptosWallet {
     rawTransaction: AnyRawTransaction,
     _asFeePayer?: boolean,
   ): Promise<UserResponse<AccountAuthenticator>> {
-    return signAptosTransactionWithEthereum({
+    return signCedraTransactionWithEthereum({
       eip1193Provider: this.eip1193Provider,
       authenticationFunction: this.authenticationFunction,
       rawTransaction,

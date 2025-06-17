@@ -1,9 +1,9 @@
 import {
   AccountAddressInput,
-  Aptos,
-  AptosConfig,
+  Cedra,
+  CedraConfig,
   Network,
-} from "@aptos-labs/ts-sdk";
+} from "@cedra-labs/ts-sdk";
 import { queryOptions } from "@tanstack/react-query";
 
 export function getAptBalanceQueryOptions({
@@ -22,10 +22,10 @@ export function getAptBalanceQueryOptions({
       "aptBalance",
     ],
     queryFn: async () => {
-      const aptos = new Aptos(new AptosConfig({ network: network }));
-      return aptos.getAccountCoinAmount({
+      const cedra = new Cedra(new CedraConfig({ network: network }));
+      return cedra.getAccountCoinAmount({
         accountAddress,
-        coinType: "0x1::aptos_coin::AptosCoin",
+        coinType: "0x1::cedra_coin::CedraCoin",
       });
     },
     gcTime: 60000, // 1 minute

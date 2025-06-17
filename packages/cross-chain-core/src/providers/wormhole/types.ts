@@ -1,7 +1,7 @@
-import { AccountAddressInput, Account } from "@aptos-labs/ts-sdk";
-import { AdapterWallet } from "@aptos-labs/wallet-adapter-core";
+import { AccountAddressInput, Account } from "@cedra-labs/ts-sdk";
+import { AdapterWallet } from "@cedra-labs/wallet-adapter-core";
 import { routes, AttestationReceipt } from "@wormhole-foundation/sdk/dist/cjs";
-import { Chain, AptosAccount } from "../..";
+import { Chain, CedraAccount } from "../..";
 
 export type WormholeRouteResponse = routes.Route<
   "Mainnet" | "Testnet",
@@ -44,8 +44,8 @@ export interface WormholeSubmitTransferRequest {
 
 export interface WormholeClaimTransferRequest {
   receipt: routes.Receipt<AttestationReceipt>;
-  mainSigner: AptosAccount;
-  sponsorAccount?: AptosAccount | GasStationApiKey;
+  mainSigner: CedraAccount;
+  sponsorAccount?: CedraAccount | GasStationApiKey;
 }
 
 export interface WormholeInitiateTransferResponse {
