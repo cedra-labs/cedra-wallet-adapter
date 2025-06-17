@@ -28,6 +28,9 @@
     "deploy:example-vue": "pnpm run vue-example:build && touch ./apps/nuxt-example/.output/public/.nojekyll && gh-pages --dist apps/nuxt-example/.output/public --dest nuxt-example --dotfiles",
     "vue-example:build": "pnpm run --filter {apps/nuxt-example} build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@cedra-labs/eslint-config-adapter": "0.0.2",
     "@changesets/cli": "^2.22.0",
