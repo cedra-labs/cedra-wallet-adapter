@@ -56,7 +56,6 @@
   "dependencies": {
     "@identity-connect/wallet-adapter-plugin": "1.2.5",
     "@cedra-labs/wallet-standard": "^0.4.0",
-    "@atomrigslab/aptos-wallet-adapter": "^0.1.20",
     "buffer": "^6.0.3",
     "eventemitter3": "^4.0.7",
     "tweetnacl": "^1.0.3"
