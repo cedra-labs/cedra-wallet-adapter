@@ -18,13 +18,7 @@ A monorepo modular wallet adapter developed and maintained by Cedra for wallet a
 > **_NOTE:_** These are in alphabetical order, any new wallets must be in alphabetical order
 
 - [CedraConnect](https://cedraconnect.app/)
-- [Mizu](https://www.mizu.io/)
-- [MSafe](https://www.npmjs.com/package/@msafe/cedra-wallet-adapter)
 - [Nightly](https://chromewebstore.google.com/detail/nightly/fiikommddbeccaoicoejoniammnalkfa)
-- [OKX](https://www.npmjs.com/package/@okwallet/cedra-wallet-adapter)
-- [Petra](https://chromewebstore.google.com/detail/petra-cedra-wallet/ejjladinnckdgjemekebdpeokbikhfci?hl=en)
-- [Pontem](https://www.npmjs.com/package/@pontem/wallet-adapter-plugin)
-- [RimoSafe](https://chromewebstore.google.com/detail/rimo-safe-wallet/kiicddjcakdmobjkcpppkgcjbpakcagp)
 - T wallet
 
 #### Develop Locally

@@ -19,13 +19,7 @@ Note: These are in alphabetical order, any new wallets must be in alphabetical o
 [AIP-62](https://github.com/cedra-foundation/AIPs/blob/main/aips/aip-62.md) standard compatible
 
 - [CedraConnect](https://cedraconnect.app/)
-- [Mizu](https://www.mizu.io/)
-- [MizuWallet](https://www.npmjs.com/package/@mizuwallet-sdk/cedra-wallet-adapter)
-- [MSafe](https://www.npmjs.com/package/@msafe/cedra-wallet-adapter)
 - [Nightly](https://chromewebstore.google.com/detail/nightly/fiikommddbeccaoicoejoniammnalkfa)
-- [OKX](https://www.npmjs.com/package/@okwallet/cedra-wallet-adapter)
-- [Petra](https://chromewebstore.google.com/detail/petra-cedra-wallet/ejjladinnckdgjemekebdpeokbikhfci?hl=en)
-- [Pontem](https://www.npmjs.com/package/@pontem/wallet-adapter-plugin)
 - T wallet
 
 Legacy standard compatible
