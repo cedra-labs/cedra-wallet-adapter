@@ -6,7 +6,7 @@ import { InputGenerateTransactionPayloadData } from "@cedra-labs/ts-sdk";
 import { WalletReadyState } from "../constants";
 
 export interface CedraStandardSupportedWallet {
-  // The name of your wallet cast to WalletName (Ex. "Petra" as WalletName<"Petra">)
+  // The name of your wallet cast to WalletName (Ex. "Nightly" as WalletName<"Nightly">)
   name: string;
   // The link to your chrome extension or main website where new users can create an account with your wallet.
   url: string;
@@ -27,13 +27,7 @@ export interface CedraStandardSupportedWallet {
 export type AvailableWallets =
   | "Continue with Apple"
   | "Continue with Google"
-  | "MSafe"
-  | "Mizu Wallet"
   | "Nightly"
-  | "OKX Wallet"
-  | "Petra"
-  | "Pontem Wallet"
-  | "Rimosafe"
   | "T wallet";
 
 export type InputTransactionData = {

@@ -76,7 +76,7 @@ const wallets = [new CedraLegacyStandardWallet()];
 <CedraWalletAdapterProvider
   plugins={wallets}
   autoConnect={true}
-  optInWallets={["Petra"]}
+  optInWallets={["Nightly"]}
   dappConfig={{ network: network.MAINNET, cedraApiKey: "my-generated-api-key" }}
   onError={(error) => {
     console.log("error", error);

@@ -86,7 +86,7 @@ import { Network } from "@cedra-labs/ts-sdk";
 ```tsx
 <CedraWalletAdapterProvider
   ...
-  optInWallets={["Petra"]}
+  optInWallets={["Nightly"]}
   ...
 >
   <App />
