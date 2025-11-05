@@ -34,7 +34,5 @@ export const cedraStandardSupportedWalletList: Array<CedraStandardSupportedWalle
       isAIP62Standard: true,
       deeplinkProvider: "https://zedra.app/",
     }
-
-
   ];
   
