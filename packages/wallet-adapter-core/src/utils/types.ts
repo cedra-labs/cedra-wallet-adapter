@@ -28,6 +28,7 @@ export type AvailableWallets =
   | "Continue with Apple"
   | "Continue with Google"
   | "Nightly"
+  | "Zedra"
   | "T wallet";
 
 export type InputTransactionData = {
