@@ -1,6 +1,6 @@
 {
   "extends": "@cedra-labs/wallet-adapter-tsconfig/base.json",
-  "include": ["."],
+  "include": ["src"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "target": "es5",
