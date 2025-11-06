@@ -43,7 +43,7 @@
     "build": "pnpm build:bundle"
   },
   "dependencies": {
-    "@cedra-labs/wallet-adapter-core": "5.5.1"
+    "@cedra-labs/wallet-adapter-core": "5.5.3"
   },
   "devDependencies": {
     "vite": "5.4.19",
