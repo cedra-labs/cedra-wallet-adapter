@@ -120,10 +120,6 @@ export interface DappConfig {
     manifestURL: string;
     appId?: string;
   };
-  msafeWalletConfig?: {
-    appId?: string;
-    appUrl?: string;
-  };
 }
 
 export declare interface WalletCoreEvents {
@@ -243,7 +239,7 @@ export class WalletCore extends EventEmitter<WalletCoreEvents> {
       if (isValid) {
         // check if we already have this wallet as a not detected wallet
         const index = this._standard_not_detected_wallets.findIndex(
-          (notDetctedWallet) => notDetctedWallet.name == wallet.name
+          (notDetctedWallet) => notDetctedWallet.name === wallet.name
         );
         // if we do, remove it from the not detected wallets array as it is now become detected
         if (index !== -1) {

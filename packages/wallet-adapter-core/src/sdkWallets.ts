@@ -4,7 +4,6 @@ import {
 } from "@cedra-labs/wallet-adapter-plugin";
 import { Network } from "@cedra-labs/ts-sdk";
 // import { DevTWallet, TWallet } from "@cedra-labs/cedra-wallet-adapter";
-import { MSafeWallet } from "./msafeWallet.ts";
 import { DappConfig, AdapterWallet } from "./WalletCore";
 
 export function getSDKWallets(dappConfig?: DappConfig) {
@@ -35,14 +34,7 @@ export function getSDKWallets(dappConfig?: DappConfig) {
     // sdkWallets.push(new DevTWallet() as any);
   }
 
-  if (dappConfig?.network) {
-    sdkWallets.push(
-      new MSafeWallet({
-        ...dappConfig?.msafeWalletConfig,
-        network: dappConfig.network,
-      })
-    );
-  }
+  // MSafe wallet removed
 
   // Add new SDK wallet plugins (ones that should be installed as packages) here:
   // Ex. sdkWallets.push(new YourSDKWallet(dappConfig))
